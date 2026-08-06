@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, LogIn, Menu, Moon, Sun, X } from 'lucide-react'
 import { text } from '../../lib/site'
 import { useScrollSpy } from '../../lib/hooks'
+import Img from '../Img'
 import { NAV, NAV_IDS } from './shared'
 
 export default function Navbar({ site, settings, theme, toggleTheme }) {
@@ -19,7 +20,7 @@ export default function Navbar({ site, settings, theme, toggleTheme }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
       >
-        <a href="#home" className="brand"><span className="logo">{settings.logoImage ? <img src={settings.logoImage} alt={settings.siteName} /> : settings.logoText}</span>{settings.siteName}</a>
+        <a href="#home" className="brand"><span className="logo">{settings.logoImage ? <Img src={settings.logoImage} alt={settings.siteName} width={40} height={40} /> : settings.logoText}</span>{settings.siteName}</a>
         <div className="nav-links">
           {NAV.map((n) => (
             <a key={n.id} href={`#${n.id}`} className={active === n.id ? 'active' : ''}>{text(site, n.key)}</a>

@@ -99,7 +99,12 @@ body::before {
 
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
+/* <picture> is a transparent wrapper: it must not become the flex/grid item, or
+   rules like `.hero-photo img { height: 100% }` and `.brand .logo img` would
+   resolve against the wrapper instead of the real box. `display: contents`
+   keeps the <img> the direct child for layout, so existing selectors hold. */
+picture { display: contents; }
 button, input, textarea, select { font: inherit; color: inherit; }
 button { cursor: pointer; background: none; border: none; }
 
@@ -151,8 +156,10 @@ h1, h2, h3, .display { font-family: var(--font-display); font-weight: 700; line-
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  /* Blur capped at 16px: backdrop-filter cost scales with radius and .glass is
+     applied to nearly every card on the page. 18 -> 16 is imperceptible. */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow: var(--shadow-sm);
 }
 
@@ -210,6 +217,16 @@ h1, h2, h3, .display { font-family: var(--font-display); font-weight: 700; line-
 .section-head.center .eyebrow { justify-content: center; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
   html { scroll-behavior: auto; }
+  /* Nothing needs a promoted compositor layer when nothing moves.
+     !important because styles.css is imported after this file. */
+  .marquee-track, .scroll-progress { will-change: auto !important; }
 }

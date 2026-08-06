@@ -88,9 +88,27 @@ export default defineConfig({
     host: true,
   },
   build: {
+    // Every browser this site supports has native ESM + optional chaining, so there
+    // is no reason to ship downlevelled output or the modulepreload polyfill.
+    target: 'es2020',
+    modulePreload: { polyfill: false },
+    // Below-the-fold sections are React.lazy()'d, so their CSS should travel with
+    // them instead of bloating the render-blocking stylesheet.
+    cssCodeSplit: true,
+    // No sourcemaps in prod (they double the deploy payload and leak source).
+    sourcemap: false,
+    // Skip the gzip-size pass — it is pure build-time cost, the CDN gzips anyway.
+    reportCompressedSize: false,
     chunkSizeWarningLimit: 900,
     rollupOptions: {
       output: {
+        // Shared vendors stay pinned to their own long-cached chunks. This matters
+        // MORE now that sections are lazy: without it, framer-motion / lucide would
+        // be duplicated into (or arbitrarily hoisted between) the section chunks.
+        // `react` is the only genuinely render-blocking one; `motion` and `icons`
+        // are shared by the eager shell and the lazy sections alike, so keeping
+        // them separate means the section chunks stay tiny and cache independently
+        // of app code changes.
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom'],
           motion: ['framer-motion'],

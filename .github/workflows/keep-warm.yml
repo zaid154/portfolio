@@ -1,0 +1,93 @@
+# Keep the Render free-plan API warm.
+#
+# Render idles a free web service after ~15 minutes with no inbound traffic. The
+# next visitor then pays a 30-60 s cold start. This workflow pings the health
+# endpoint on a schedule so the container (usually) never gets the chance to idle.
+#
+# OPT-IN — it does nothing until you set the URL. Add ONE of:
+#   • Repository variable  KEEP_WARM_URL   (Settings → Secrets and variables →
+#     Actions → Variables), or
+#   • Repository secret    KEEP_WARM_URL   (same page → Secrets) if you would
+#     rather not have the hostname visible in logs.
+# Value, including the /api/health path:
+#   https://portfolio-cms-api.onrender.com/api/health
+# With neither set, every run exits 0 immediately with a "not configured" notice —
+# it never fails your Actions tab.
+#
+# HONEST LIMITATIONS — read before relying on this:
+#   1. GitHub's scheduled runners are best-effort and free. `schedule` is queued,
+#      not guaranteed: runs are commonly delayed by 5-20 minutes and are dropped
+#      outright during peak load. So a 12-minute cron will still miss windows and
+#      the service WILL cold-start sometimes. It reduces the frequency; it does
+#      not eliminate cold starts.
+#   2. GitHub disables scheduled workflows in public repos after ~60 days of no
+#      repository activity. You get an email; re-enable it from the Actions tab.
+#   3. A dedicated uptime pinger (UptimeRobot, cron-job.org, Better Stack) fires
+#      far more reliably than GitHub cron. Prefer one of those if uptime matters;
+#      this workflow exists so the repo carries a zero-signup option.
+#   4. Keeping a free instance awake around the clock is against the spirit of the
+#      free plan and burns your monthly free instance hours faster. The only real
+#      fix is a paid instance, which never spins down.
+
+name: Keep Render API warm
+
+on:
+  schedule:
+    # Every 12 minutes — inside Render's ~15 min idle window, with margin for the
+    # delay GitHub's scheduler routinely adds. Cron here is UTC.
+    - cron: "*/12 * * * *"
+  # Lets you verify the setup immediately instead of waiting for the next tick.
+  workflow_dispatch:
+
+# Never let two pings overlap if a run is queued behind a slow cold start.
+concurrency:
+  group: keep-warm
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping /api/health
+        env:
+          # A repository variable wins; the secret is the fallback. Both are empty
+          # strings when unset, which the script below treats as "not configured".
+          KEEP_WARM_URL: ${{ vars.KEEP_WARM_URL || secrets.KEEP_WARM_URL }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${KEEP_WARM_URL}" ]; then
+            echo "KEEP_WARM_URL is not set — nothing to ping."
+            echo "Set it as an Actions variable or secret to enable this workflow."
+            echo "See the comments at the top of .github/workflows/keep-warm.yml"
+            exit 0
+          fi
+
+          # --max-time 90: a cold container can take 30-60 s to answer, and that
+          # slow response is exactly the case we want to succeed, not time out.
+          # Retries cover a container that is mid-restart.
+          status=$(curl \
+            --silent \
+            --show-error \
+            --location \
+            --retry 3 \
+            --retry-delay 10 \
+            --retry-all-errors \
+            --max-time 90 \
+            --output /tmp/health.txt \
+            --write-out '%{http_code}' \
+            "${KEEP_WARM_URL}") || true
+
+          echo "HTTP ${status}"
+          echo "Body: $(head -c 300 /tmp/health.txt 2>/dev/null || true)"
+
+          if [ "${status}" != "200" ]; then
+            echo "::error::Health check did not return 200 (got '${status}')."
+            exit 1
+          fi
+
+          echo "API is awake."

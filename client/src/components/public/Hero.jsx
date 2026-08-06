@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Download, Code2, Zap } from 'lucide-react'
 import { first, asArray } from '../../lib/site'
+import Img from '../Img'
 import { Heading } from './shared'
 
 function useTypewriter(words, speed = 90, pause = 1500) {
@@ -70,7 +71,17 @@ export default function Hero({ site }) {
         <span className="hero-orb a" />
         <span className="hero-orb b" />
         <div className="hero-photo">
-          {hero.data.image && <img src={hero.data.image} alt={hero.title} />}
+          {/* The only above-the-fold image on the page — eager + high priority. */}
+          {hero.data.image && (
+            <Img
+              src={hero.data.image}
+              alt={hero.title}
+              width={560}
+              height={700}
+              priority
+              sizes="(max-width: 900px) 280px, 360px"
+            />
+          )}
         </div>
         {hero.data.floatOne && (
           <motion.div className="hero-float top glass" animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }}>

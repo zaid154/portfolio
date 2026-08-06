@@ -8,6 +8,7 @@ import {
 } from '../models/contentModels.js'
 import { asyncHandler } from '../utils/asyncHandler.js'
 import { ApiError } from '../utils/apiError.js'
+import { invalidateSite } from '../utils/siteCache.js'
 
 // Generate a slug that doesn't collide within the given scope (whole collection
 // for standalone types, or {type} within the shared collection).
@@ -48,6 +49,8 @@ export const createContent = asyncHandler(async (req, res) => {
   const base = req.body.slug || slugify(req.body.title, { lower: true, strict: true })
   const slug = await uniqueSlug(model, base, scopeForType(type))
   const item = await model.create({ ...req.body, type, slug })
+  // Public payload is cached in-process — drop it so the edit shows up now.
+  invalidateSite()
   res.status(201).json({ success: true, item })
 })
 
@@ -68,6 +71,9 @@ export const updateContent = asyncHandler(async (req, res) => {
     new: true,
     runValidators: true,
   })
+  // Covers edits, publish/unpublish and the dashboard's drag-reorder (which
+  // saves each moved row through this same PUT with a new `order`).
+  invalidateSite()
   res.json({ success: true, item })
 })
 
@@ -75,5 +81,6 @@ export const deleteContent = asyncHandler(async (req, res) => {
   const found = await findAcrossModels(req.params.id)
   if (!found) throw new ApiError(404, 'Content item not found')
   await found.model.findByIdAndDelete(found.doc._id)
+  invalidateSite()
   res.json({ success: true })
 })

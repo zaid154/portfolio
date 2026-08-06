@@ -23,6 +23,11 @@ export function uploadSingle(req, res, next) {
   })
 }
 
+// NOTE: no invalidateSite() here on purpose. This route only pushes bytes to
+// Cloudinary and hands the URL back to the admin form — it writes no content
+// document, so the public payload cannot have changed yet. The URL only becomes
+// site content when the form is saved through /api/admin/content, and THAT
+// controller invalidates the cache.
 export const uploadFile = asyncHandler(async (req, res) => {
   if (!req.file) throw new ApiError(400, 'No file uploaded')
 

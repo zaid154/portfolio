@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from 'react'
+import { Component, useCallback, useEffect, useState } from 'react'
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion'
 import { ArrowUp } from 'lucide-react'
 import { useCountUp } from '../lib/hooks'
@@ -17,6 +17,10 @@ export class ErrorBoundary extends Component {
   }
   render() {
     if (this.state.hasError) {
+      // A `fallback` prop scopes the boundary: pass `null` around a code-split
+      // section so a chunk that fails to download drops just that section
+      // instead of replacing an already-painted page with the error screen.
+      if ('fallback' in this.props) return this.props.fallback
       return (
         <div className="err-screen">
           <h1>Something went wrong</h1>
@@ -36,30 +40,83 @@ export function ScrollProgress() {
   return <motion.div className="scroll-progress" style={{ scaleX, width: '100%' }} />
 }
 
-/* One-time intro preloader */
-export function Preloader({ mark = 'MZ' }) {
-  const [show, setShow] = useState(() => !sessionStorage.getItem('pl_shown'))
+/* One-time intro preloader.
+
+   It is a cover for the moment before content exists — never a delay in its own
+   right. Two rules keep it honest:
+     1. It leaves the instant the app is ready (`ready` = the site payload landed).
+     2. A hard cap guarantees it can never add more than PRELOADER_CAP_MS to a
+        load, however slow or dead the API is.
+   It is skipped entirely for `prefers-reduced-motion: reduce` and for sessions
+   that have already seen it. It is also pointer-transparent, so the page below
+   is interactive from the first frame even while the overlay fades. */
+const PRELOADER_CAP_MS = 450
+const PRELOADER_FADE_S = 0.25
+
+function shouldShowPreloader() {
+  try {
+    if (sessionStorage.getItem('pl_shown')) return false
+  } catch {
+    /* sessionStorage can throw in blocked/private contexts — treat as "not seen" */
+  }
+  try {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
+  } catch {
+    /* no matchMedia — fall through and show */
+  }
+  return true
+}
+
+export function Preloader({ mark = 'MZ', ready = false }) {
+  const [show, setShow] = useState(shouldShowPreloader)
+
+  const dismiss = useCallback(() => {
+    setShow(false)
+    try {
+      sessionStorage.setItem('pl_shown', '1')
+    } catch {
+      /* ignore — the overlay still goes away, it just may show again next load */
+    }
+  }, [])
+
+  // Hard cap. Mount-only, so a late `ready` can never extend it.
   useEffect(() => {
     if (!show) return undefined
-    const t = setTimeout(() => {
-      setShow(false)
-      sessionStorage.setItem('pl_shown', '1')
-    }, 1100)
+    const t = setTimeout(dismiss, PRELOADER_CAP_MS)
     return () => clearTimeout(t)
-  }, [show])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dismiss])
+
+  // Ready → leave on the very next frame, i.e. as soon as there is something
+  // painted underneath to look at.
+  useEffect(() => {
+    if (!show || !ready) return undefined
+    const raf = requestAnimationFrame(dismiss)
+    return () => cancelAnimationFrame(raf)
+  }, [show, ready, dismiss])
+
   return (
     <AnimatePresence>
       {show && (
-        <motion.div className="preloader" exit={{ opacity: 0, transition: { duration: 0.5 } }}>
+        <motion.div
+          className="preloader"
+          style={{ pointerEvents: 'none' }}
+          exit={{ opacity: 0, transition: { duration: PRELOADER_FADE_S } }}
+        >
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
             className="mark gradient-text"
           >
             {mark}
           </motion.div>
           <div className="bar">
-            <motion.span initial={{ width: 0 }} animate={{ width: '100%' }} transition={{ duration: 1 }} />
+            <motion.span
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ duration: PRELOADER_CAP_MS / 1000 }}
+            />
           </div>
         </motion.div>
       )}

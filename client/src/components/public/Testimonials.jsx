@@ -1,6 +1,7 @@
 import { Quote } from 'lucide-react'
 import { text } from '../../lib/site'
 import { Reveal, StaggerGroup, StaggerItem } from '../ui'
+import Img from '../Img'
 import { Heading, initials } from './shared'
 
 export default function Testimonials({ site }) {
@@ -20,7 +21,7 @@ export default function Testimonials({ site }) {
               <p>{t.data.quote}</p>
               <div className="tst-author">
                 {t.data.avatar
-                  ? <img className="tst-avatar" src={t.data.avatar} alt={t.data.name || t.title} />
+                  ? <Img className="tst-avatar" src={t.data.avatar} alt={t.data.name || t.title} width={96} height={96} />
                   : <div className="tst-avatar">{initials(t.data.name || t.title)}</div>}
                 <div><strong>{t.data.name || t.title}</strong><span>{t.data.role}</span></div>
               </div>

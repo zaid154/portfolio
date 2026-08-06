@@ -9,6 +9,7 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import { env } from './config/env.js'
+import { hasEverConnected } from './config/db.js'
 import authRoutes from './routes/auth.routes.js'
 import contentRoutes from './routes/content.routes.js'
 import messageRoutes from './routes/message.routes.js'
@@ -75,6 +76,9 @@ app.use(
     credentials: true,
   })
 )
+// Compress everything, so it sits above the routers AND the static client build
+// (the site payload and the JS bundles are where gzip actually pays off).
+app.use(compression())
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -92,12 +96,29 @@ app.use('/api/public/contact', strict(8, 60 * 60 * 1000, 'Too many messages sent
 app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ extended: true }))
 app.use(sanitize)
-app.use(compression())
 app.use(cookieParser())
 app.use(morgan(env.nodeEnv === 'production' ? 'combined' : 'dev'))
 
+// Liveness probe, and the endpoint an EXTERNAL keep-warm cron (UptimeRobot,
+// cron-job.org, Render cron) should ping to keep the free-plan instance from
+// cold-starting. Deliberately no in-process self-ping timer: a process pinging
+// itself keeps nothing awake once the host has already suspended it, and it
+// burns the one shared CPU we are trying to protect.
+//
+// It answers 503 until the database has been reached ONCE. Without that, a
+// container that can never talk to Atlas (bad MONGO_URI, lapsed IP allowlist)
+// would still pass render.yaml's healthCheckPath — because binding now happens
+// before the connect — and Render would promote the broken deploy over a working
+// one. A healthy deploy flips to 200 within a second or two; see
+// hasEverConnected() in config/db.js for why it latches instead of tracking the
+// live connection state.
 app.get('/api/health', (_req, res) => {
-  res.json({ success: true, service: 'portfolio-cms-api' })
+  const dbReady = hasEverConnected()
+  res.status(dbReady ? 200 : 503).json({
+    success: dbReady,
+    service: 'portfolio-cms-api',
+    db: dbReady ? 'connected' : 'connecting',
+  })
 })
 
 app.use('/api/auth', authRoutes)
@@ -111,9 +132,28 @@ app.use('/api/public', publicRoutes)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const clientDist = path.resolve(__dirname, '../../client/dist')
 if (fs.existsSync(path.join(clientDist, 'index.html'))) {
-  app.use(express.static(clientDist))
+  const ONE_YEAR = '365d'
+  app.use(
+    express.static(clientDist, {
+      // Vite writes content-hashed filenames into /assets, so those bytes can
+      // never change under a given URL — cache them forever and skip even the
+      // revalidation request.
+      maxAge: ONE_YEAR,
+      immutable: true,
+      setHeaders(res, filePath) {
+        const rel = path.relative(clientDist, filePath).replace(/\\/g, '/')
+        const hashed = rel.startsWith('assets/')
+        // Set it explicitly in BOTH branches so we never depend on whether
+        // serve-static's own maxAge header lands before or after this hook.
+        // index.html (and anything else unhashed) must revalidate, otherwise a
+        // deploy leaves visitors pinned to a stale bundle reference.
+        res.setHeader('Cache-Control', hashed ? 'public, max-age=31536000, immutable' : 'no-cache')
+      },
+    })
+  )
   app.use((req, res, next) => {
     if (req.method !== 'GET' || req.path.startsWith('/api')) return next()
+    res.set('Cache-Control', 'no-cache')
     res.sendFile(path.join(clientDist, 'index.html'))
   })
 }

@@ -8,9 +8,46 @@ services:
     # which is a harmless no-op here since we don't build the client on Render.)
     buildCommand: npm install --prefix server
     startCommand: npm start
+    # Render probes this path after each deploy and keeps polling it while the
+    # service runs. GET /api/health is the right target: it is unauthenticated and
+    # touches no database (server/src/app.js), so it answers as soon as the process
+    # is actually listening. Two things it buys:
+    #   • a deploy only receives traffic once the NEW container answers 200, so
+    #     Render never flips the domain onto a container that failed to boot;
+    #   • an instance that stops answering is restarted instead of quietly 502-ing.
+    # Honest caveat: this does NOT defeat free-plan spin-down. Render still idles a
+    # free web service after ~15 min with no inbound traffic, and its own health
+    # probes do not count as traffic. See README → "Performance & deployment" for
+    # the two real remedies (an external pinger, or a paid instance).
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
+      # Pin the Node major so a change to Render's default runtime can't silently
+      # alter a deploy. Express 5 + Mongoose 9 need Node 18+; 22 is current LTS and
+      # the server has no native dependencies, so this is safe to bump.
+      - key: NODE_VERSION
+        value: "22"
+      # server/.npmrc sets legacy-peer-deps because multer-storage-cloudinary@4 still
+      # pins peer cloudinary@^1 while the app uses cloudinary@2. The build runs
+      # `npm install --prefix server` from the repo ROOT, and npm resolves its
+      # project .npmrc relative to the working directory — not to --prefix — so
+      # state it here as well and the install can never fail with ERESOLVE.
+      # Redundant (harmless) if the .npmrc is picked up anyway.
+      - key: NPM_CONFIG_LEGACY_PEER_DEPS
+        value: "true"
+      #
+      # Deliberately NOT set here:
+      #   NODE_OPTIONS  — nothing to tune. The API is a small Express app; the
+      #                   default heap is far below the free plan's memory limit,
+      #                   so --max-old-space-size would only be cargo cult.
+      #   DNS_SERVERS   — this is a LOCAL-dev escape hatch for machines whose
+      #                   resolver can't do mongodb+srv SRV lookups. Setting it on
+      #                   Render would force every Atlas SRV lookup out to a public
+      #                   resolver instead of Render's fast internal one, making
+      #                   each cold start slower. Leave it unset in production.
+      #   PORT          — Render injects its own; server/src/index.js reads it.
+      #
       # CORS allow-list — set to your Vercel URL(s), comma-separated. *.vercel.app
       # preview deployments are always allowed by the API, so this is your prod domain.
       # e.g. https://mohd-zaid-portfolio.vercel.app

@@ -12,6 +12,9 @@
   background: var(--gradient);
   transform-origin: 0 50%;
   box-shadow: 0 0 12px rgba(90, 99, 224, 0.6);
+  /* Scroll-linked scaleX spring (framer-motion) — transforms every scroll frame,
+     so a permanent compositor layer is genuinely earned here. */
+  will-change: transform;
 }
 
 /* -------- Preloader -------- */
@@ -56,8 +59,10 @@
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--surface);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  /* Fixed + always on screen: this backdrop blur is re-sampled on every scroll
+     frame, so it is the single most expensive filter on the page. Capped at 16px. */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.3s, background 0.3s;
 }
@@ -226,7 +231,9 @@
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
-.marquee-track { display: flex; gap: 56px; width: max-content; animation: scrollx 26s linear infinite; }
+/* will-change: the only element on the page running an infinite transform
+   animation — promoting it keeps the marquee off the main-thread paint path. */
+.marquee-track { display: flex; gap: 56px; width: max-content; animation: scrollx 26s linear infinite; will-change: transform; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 .marquee-track span {
   font-family: var(--font-display);
@@ -427,6 +434,23 @@
 .service-num { position: absolute; top: 20px; right: 24px; font-family: var(--font-display); font-size: 2.4rem; font-weight: 800; color: var(--line); }
 
 /* -------- Testimonials -------- */
+/* Skip layout + paint for this block while it is off-screen — the three cards are
+   `.glass`, and backdrop-filter is the most expensive thing we paint, so not
+   painting them at all is the real win here.
+   Why only this section: it is the ONLY public `.section` that is not an in-page
+   anchor target (#home #work #skills #services #about #blog #contact all are), so
+   no navbar link or useScrollSpy id depends on it resolving its height early; and
+   `contain-intrinsic-size: auto` makes the browser remember the measured height
+   after the first render, keeping offsetTop of #blog / #contact below it correct.
+   Known, deliberate side effects of the implied `contain: paint` — both verified
+   sub-perceptual against this design: the section becomes a backdrop root (the
+   cards' blur samples nothing instead of the near-flat dark /bg.svg), and child
+   box-shadows clip at the padding box (>=20px horizontal, >=64px vertical away).
+   Degrades to a no-op on engines without :has(). */
+.section:has(.tst-grid) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 620px;
+}
 .tst-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .tst-card { padding: 28px; border-radius: var(--radius); display: flex; flex-direction: column; gap: 18px; }
 .tst-card .quote-icon { color: var(--accent); opacity: 0.6; }
@@ -558,7 +582,7 @@ a.contact-line:hover { transform: translateX(3px); }
   height: 100vh;
   border-right: 1px solid var(--line);
   background: var(--surface);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px);
   padding: 22px 16px;
   display: flex;
   flex-direction: column;

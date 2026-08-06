@@ -5,7 +5,24 @@ import axios from 'axios'
 // https://<your-render-service>.onrender.com/api (Vercel), or '/api' for a same-origin deploy.
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
+  // The API sleeps on Render's free plan; a cold start legitimately takes 30-60s,
+  // so this is a "something is actually broken" ceiling, not a latency budget.
+  // Nothing waits on it visually — useSite() paints cached/snapshot content first.
+  timeout: 45000,
 })
+
+// Record the API origin so index.html can preconnect to it on the NEXT visit,
+// before the bundle loads. The origin can't be known from static HTML, and this
+// is the cheapest way to hand it over. Purely an optimisation — wrapped because
+// localStorage throws in Safari private mode.
+try {
+  const base = import.meta.env.VITE_API_URL
+  if (base && /^https?:\/\//i.test(base)) {
+    localStorage.setItem('portfolio_api_origin', new URL(base).origin)
+  }
+} catch {
+  // Storage blocked or an unparseable base URL — skip the hint.
+}
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('portfolio_admin_token')

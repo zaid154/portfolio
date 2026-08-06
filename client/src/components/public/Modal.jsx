@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
+import Img from '../Img'
 
 // Shared reader popup for both projects and blog posts.
 export default function Modal({ item, onClose }) {
@@ -28,7 +29,7 @@ export default function Modal({ item, onClose }) {
             onClick={(e) => e.stopPropagation()}
           >
             <button className="modal-close" onClick={onClose} aria-label="Close"><X size={18} /></button>
-            {item.img && <div className="modal-img"><img src={item.img} alt={item.title} /></div>}
+            {item.img && <div className="modal-img"><Img src={item.img} alt={item.title} width={1280} height={720} sizes="(max-width: 760px) 100vw, 720px" /></div>}
             <div className="modal-body">
               {item.tags?.length > 0 && (
                 <div className="project-tags" style={{ marginBottom: 14 }}>{item.tags.map((t) => <span key={t}>{t}</span>)}</div>

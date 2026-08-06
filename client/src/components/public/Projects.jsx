@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { asArray, text } from '../../lib/site'
 import { Reveal, GithubIcon } from '../ui'
+import Img from '../Img'
 import { Heading } from './shared'
 
 // Browser-frame address bar: show ONLY the real liveUrl hostname from the CMS.
@@ -25,7 +26,7 @@ function BrowserFrame({ project }) {
       </div>
       <div className="shot-scroll">
         {project.data.image
-          ? <img className="browser-shot" src={project.data.image} alt={project.title} loading="lazy" />
+          ? <Img className="browser-shot" src={project.data.image} alt={project.title} width={1280} height={800} sizes="(max-width: 900px) 92vw, 620px" />
           : <div className="browser-shot placeholder" />}
       </div>
     </div>

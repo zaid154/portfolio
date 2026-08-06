@@ -10,12 +10,74 @@
     <meta property="og:type" content="website" />
     <title>Mohd Zaid | Full Stack Developer</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!--
+      Start the content request before the JS bundle exists.
+
+      The API is on a free Render instance that sleeps after ~15 min idle, so a
+      cold call takes 30-60s. Waiting for the bundle to download and parse before
+      even asking for content made that worse. This kicks off the CDN-served
+      build-time snapshot (scripts/snapshot.mjs writes it) in <head>, and parks
+      the promise on window.__SITE_SNAPSHOT__ — useSite() consumes it instead of
+      re-fetching, so a first-time visitor sees the full site while Render wakes.
+
+      It also warms the DNS + TLS handshake to the API for returning visitors:
+      the origin isn't knowable from static HTML, so lib/api.js records it in
+      localStorage on the first visit and we replay it from there.
+      Everything is wrapped — this script must never be able to break the page.
+    -->
+    <script>
+      (function () {
+        try {
+          window.__SITE_SNAPSHOT__ = fetch('/site-snapshot.json')
+            .then(function (res) {
+              return res.ok ? res.json() : null
+            })
+            .catch(function () {
+              return null
+            })
+        } catch (e) {
+          window.__SITE_SNAPSHOT__ = null
+        }
+        try {
+          var origin = window.localStorage.getItem('portfolio_api_origin')
+          if (origin && /^https?:\/\/[^\s"'<>]+$/.test(origin)) {
+            ;['preconnect', 'dns-prefetch'].forEach(function (rel) {
+              var link = document.createElement('link')
+              link.rel = rel
+              link.href = origin
+              // Matches the credential-less CORS request axios makes, so the
+              // warmed connection is actually reused rather than reopened.
+              if (rel === 'preconnect') link.crossOrigin = ''
+              document.head.appendChild(link)
+            })
+          }
+        } catch (e) {
+          /* storage blocked (Safari private mode) — skip the warm-up */
+        }
+      })()
+    </script>
+
+    <!--
+      Fonts load without blocking the first paint: media="print" makes the
+      browser fetch the stylesheet at low priority and skip render-blocking,
+      then onload flips it live. Weights are trimmed to what the CSS actually
+      uses — Sora 500 was requested but never applied anywhere.
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

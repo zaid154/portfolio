@@ -1,6 +1,7 @@
 import { CheckCircle2, ExternalLink } from 'lucide-react'
 import { first, asArray, text } from '../../lib/site'
 import { Reveal } from '../ui'
+import Img from '../Img'
 import { Heading } from './shared'
 
 export default function Timeline({ site }) {
@@ -45,7 +46,7 @@ export default function Timeline({ site }) {
                 <div className="timeline-item" key={item._id}>
                   <span className="period">{item.data.period || item.data.date}</span>
                   <h4>
-                    {item.data.image && <img className="tl-logo" src={item.data.image} alt="" />}
+                    {item.data.image && <Img className="tl-logo" src={item.data.image} alt="" width={48} height={48} />}
                     {item.title}
                   </h4>
                   <span className="org">{item.data.institution || item.data.issuer}</span>
