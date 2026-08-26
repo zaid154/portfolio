@@ -55,7 +55,7 @@ const items = [
   },
 
   // ── Stats ────────────────────────────────────────────────────────────────────
-  { type: 'stat', title: '8+', order: 1, data: { value: '8+', label: 'Projects Completed' } },
+  { type: 'stat', title: '22+', order: 1, data: { value: '22+', label: 'Projects Completed' } },
   { type: 'stat', title: '15+', order: 2, data: { value: '15+', label: 'Technologies' } },
   { type: 'stat', title: '1', order: 3, data: { value: '1', label: 'Internship' } },
   { type: 'stat', title: '100%', order: 4, data: { value: '100%', label: 'Dedication' } },
@@ -113,7 +113,7 @@ const items = [
       image: 'https://res.cloudinary.com/uvxhwkuo/image/upload/v1783331196/portfolio-cms/notegenie.png',
       stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Razorpay', 'Gemini AI', 'Resend', 'Vercel', 'Render'],
       liveUrl: '',
-      githubUrl: '',
+      githubUrl: 'https://github.com/zaid154',
     },
   },
   {
@@ -124,11 +124,290 @@ const items = [
     data: {
       description:
         'Built a full-featured MERN e-commerce platform with 70+ product listings, featuring advanced search and filtering, shopping cart, wishlist, secure checkout (Razorpay & Cash on Delivery), order tracking, returns, invoicing, and inventory management. Implemented JWT authentication, OTP verification via Gmail SMTP, and role-based access control for secure user and admin operations. Deployed the application using Vercel and Render with a scalable production-ready architecture.',
-      // TODO: upload the nexamart screenshot to Cloudinary and paste the URL here.
-      image: '',
+      image: '/images/nexamart.png',
       stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Razorpay', 'Nodemailer', 'Vercel', 'Render'],
       liveUrl: '',
-      githubUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'MockMate AI',
+    order: 3,
+    featured: true,
+    data: {
+      description:
+        'AI-powered mock interview and skill assessment platform with real-time Google Gemini 2.5 AI evaluation, live scoring, open-ended question grading with line-by-line feedback, auto-scored technical quizzes, resume PDF parsing with stack-tailored question generation, and admin-managed milestone certificates with public credential verification.',
+      image: '',
+      stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'Google Gemini AI', 'MongoDB', 'JWT', 'Vercel'],
+      liveUrl: 'https://ai-mock-interview-three-pi.vercel.app/',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'ATS Resume Builder & Analyzer',
+    order: 4,
+    featured: true,
+    data: {
+      description:
+        'Production-grade ATS resume creation and scoring platform featuring 16+ ATS-compliant templates, real-time heuristic ATS scoring engine (0–100%), job description keyword diagnostics with missing term recommendations, drag-and-drop section reordering, interactive A4 canvas, and text-selectable vectorized PDF export with 100% parseability.',
+      image: '',
+      stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'MongoDB Atlas', 'Zod', 'Nodemailer', 'Tailwind CSS'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'DevMeet',
+    order: 5,
+    featured: true,
+    data: {
+      description:
+        'Full-stack dating and professional networking platform tailored for software developers. Features Tinder-style swipe matchmaking, real-time Socket.io direct messaging, WebRTC 1-on-1 audio and video calling, photo verification badge system, tech-stack filters, and an analytics-rich admin control suite.',
+      image: '',
+      stack: ['React 19', 'Vite', 'Node.js', 'Express.js', 'Socket.io', 'WebRTC', 'MongoDB', 'Tailwind CSS'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'NexTalk',
+    order: 6,
+    featured: false,
+    data: {
+      description:
+        'Private real-time communication platform offering instant messaging, group conversations, peer-to-peer WebRTC audio and video calling without intermediate server bottlenecks, inline voice notes, rich file sharing, message reactions, pinned chats, and presence status indicators.',
+      image: '',
+      stack: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'WebRTC', 'Vite'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'PeoplePay HR & Payroll EMS',
+    order: 7,
+    featured: false,
+    data: {
+      description:
+        'Full-stack employee management and payroll platform. Offers dynamic HR metric dashboards, employee profiles with salary structures, one-click attendance check-in/out, multi-type leave approval workflows, automatic gross-to-net salary computation with deductions, and batch printable payslip generation.',
+      image: '',
+      stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'REST API'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'MZ Karigar',
+    order: 8,
+    featured: false,
+    data: {
+      description:
+        'Hyperlocal home services gig platform connecting urban households with verified local technicians (electricians, plumbers, mechanics, carpenters) within 30 minutes. Features upfront transparent rate cards, WhatsApp-first booking UX, technician partner registration, and instant payout workflows.',
+      image: '',
+      stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'Natifix',
+    order: 9,
+    featured: true,
+    data: {
+      description:
+        'Modern Netflix clone featuring a Gemini-powered conversational AI movie assistant, real-time TMDB catalog search, categorized movie/TV carousels, detailed title pages with trailer video playback, Firebase authentication, and offline watchlist persistence via Redux Toolkit.',
+      image: '/images/Natifix.png',
+      stack: ['React 19', 'Redux Toolkit', 'Firebase Auth', 'Gemini AI', 'TMDB API', 'Tailwind CSS'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'TenantSphere (.NET SaaS)',
+    order: 10,
+    featured: false,
+    data: {
+      description:
+        'Enterprise Multi-Tenant B2B SaaS architecture engineered with ASP.NET Core 8 Web API, Clean Architecture, CQRS with MediatR, Entity Framework Core 8, Dapper high-speed reads, Redis distributed caching, and dynamic tenant isolation with global query filters.',
+      image: '',
+      stack: ['ASP.NET Core 8', 'C#', 'Clean Architecture', 'CQRS', 'MediatR', 'EF Core', 'Redis', 'React 18'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'AI Image Generator',
+    order: 11,
+    featured: false,
+    data: {
+      description:
+        'Full-stack AI image generation web application allowing users to turn natural language prompts into high-resolution images. Features prompt customization, generation history, instant image downloads, and responsive design.',
+      image: '',
+      stack: ['React.js', 'Node.js', 'Express.js', 'OpenAI API', 'REST API'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'YumRun Food Delivery',
+    order: 12,
+    featured: false,
+    data: {
+      description:
+        'Full-stack food ordering and delivery web application featuring interactive restaurant menus, categorized dish filtering, cart state management, checkout with delivery tracking, and responsive mobile-first UI.',
+      image: '/images/yumrun.png',
+      stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'QuizMaster Platform',
+    order: 13,
+    featured: false,
+    data: {
+      description:
+        'Dynamic quiz and assessment platform featuring timed questions, multi-domain categories (Frontend, Backend, Aptitude), instant score calculation, detailed solution reviews, and progress tracking.',
+      image: '',
+      stack: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'Razorpay', 'Tailwind CSS'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'TaskFlow MERN Task Manager',
+    order: 14,
+    featured: false,
+    data: {
+      description:
+        'Full-stack productivity tool with CRUD task capabilities, priority tags, status filtering (Active, Completed, Overdue), search, and persistent database storage with JWT authentication.',
+      image: '/images/todo.png',
+      stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'Flipkart Clone',
+    order: 15,
+    featured: false,
+    data: {
+      description:
+        'Responsive e-commerce frontend replica replicating Flipkart’s browsing experience, multi-level category navigation, product detail views, deal banners, and stateful cart management.',
+      image: '',
+      stack: ['React.js', 'Vite', 'Tailwind CSS', 'Redux Toolkit'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'MovieSphere Discovery',
+    order: 16,
+    featured: false,
+    data: {
+      description:
+        'Dynamic movie search and discovery web application consuming TMDB API with real-time keyword search, genre filtering, modal previews, and responsive movie cards.',
+      image: '',
+      stack: ['React.js', 'Tailwind CSS', 'TMDB API', 'JavaScript'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'TrendyKart .NET Store',
+    order: 17,
+    featured: false,
+    data: {
+      description:
+        'E-commerce platform developed with ASP.NET Core MVC and Entity Framework Core, featuring product catalog management, product variants, shopping cart, Razorpay payment, and order management.',
+      image: '',
+      stack: ['ASP.NET Core', 'C#', 'Entity Framework Core', 'SQL Server', 'Razorpay', 'Bootstrap'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'Interactive Proposal App',
+    order: 18,
+    featured: false,
+    data: {
+      description:
+        'Interactive and playful romantic web application built with responsive animations, interactive button behaviors, date planning flow, and celebratory particle animations.',
+      image: '/images/proposal.png',
+      stack: ['React.js', 'Framer Motion', 'HTML5', 'CSS3', 'JavaScript'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'Color Palette & Gradient Studio',
+    order: 19,
+    featured: false,
+    data: {
+      description:
+        'Interactive color tool for developers and designers to generate, explore, and copy HEX/RGB/HSL color codes, contrast scores, and CSS gradient backgrounds.',
+      image: '',
+      stack: ['HTML5', 'CSS3', 'JavaScript (ES6+)'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'Number Guessing Arena',
+    order: 20,
+    featured: false,
+    data: {
+      description:
+        'Interactive logic game with dynamic difficulty levels, real-time proximity hints, attempt counters, and local high-score records.',
+      image: '/images/game.png',
+      stack: ['HTML5', 'CSS3', 'JavaScript'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'Neumorphic Web Calculator',
+    order: 21,
+    featured: false,
+    data: {
+      description:
+        'Modern web calculator featuring soft neumorphic UI aesthetics, keyboard input event listening, history calculation memory, and mathematical operations.',
+      image: '/images/calculator.png',
+      stack: ['HTML5', 'CSS3', 'JavaScript'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'University Portal Website',
+    order: 22,
+    featured: false,
+    data: {
+      description:
+        'Responsive higher education institution website template featuring academic course outlines, department overviews, campus admissions information, and contact inquiry forms.',
+      image: '',
+      stack: ['HTML5', 'CSS3', 'JavaScript'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
     },
   },
 

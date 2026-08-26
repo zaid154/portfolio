@@ -6,28 +6,27 @@ import { Reveal, GithubIcon } from '../ui'
 import Img from '../Img'
 import { Heading } from './shared'
 
-// Browser-frame address bar: show ONLY the real liveUrl hostname from the CMS.
-// If a project has no liveUrl we show its (DB) title rather than fabricating a
-// fake "<name>.vercel.app" domain — nothing on screen is invented in code.
-function displayUrl(project) {
-  const u = project.data.liveUrl
-  if (u && /^https?:\/\//i.test(u)) {
-    try { return new URL(u).hostname.replace(/^www\./, '') } catch { /* fall through */ }
-  }
-  return project.title
-}
-
-function BrowserFrame({ project }) {
+function ProjectMedia({ project }) {
   return (
-    <div className="browser">
-      <div className="browser-bar">
-        <i className="tl r" /><i className="tl y" /><i className="tl g" />
-        <span className="url">{displayUrl(project)}</span>
-      </div>
+    <div className="project-card-media">
       <div className="shot-scroll">
-        {project.data.image
-          ? <Img className="browser-shot" src={project.data.image} alt={project.title} width={1280} height={800} sizes="(max-width: 900px) 92vw, 620px" />
-          : <div className="browser-shot placeholder" />}
+        {project.data.image ? (
+          <Img
+            className="project-shot"
+            src={project.data.image}
+            alt={project.title}
+            width={1280}
+            height={800}
+            sizes="(max-width: 900px) 92vw, 620px"
+          />
+        ) : (
+          <div className="project-shot placeholder">
+            <div className="placeholder-content">
+              <span className="placeholder-title">{project.title}</span>
+              <span className="placeholder-sub">Project Showcase</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -76,10 +75,10 @@ export default function Projects({ site, onOpen }) {
                 className={i % 2 ? 'showcase-row reverse' : 'showcase-row'}
               >
                 <div className="showcase-media" onClick={() => onOpen(p)}>
-                  <BrowserFrame project={p} />
+                  <ProjectMedia project={p} />
                 </div>
                 <div className="showcase-info">
-                  <span className="snum">{String(i + 1).padStart(2, '0')}{p.featured ? ` — ${featuredLabel}` : ''}</span>
+                  <span className="snum">{String(p.order != null ? p.order : i + 1).padStart(2, '0')}{p.featured ? ` — ${featuredLabel}` : ''}</span>
                   <h3>{p.title}</h3>
                   <p>{p.data.description}</p>
                   <div className="project-tags">
