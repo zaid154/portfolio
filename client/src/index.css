@@ -12,34 +12,37 @@
 :root {
   color-scheme: dark;
 
-  /* Brand — Slate & Indigo (design-panel palette; cool indigo, no cyan) */
-  --g1: #8189f5;
+  /* Brand — Modern Electric Indigo & Violet Gradient */
+  --g1: #8c7cf0;
   --g2: #5a63e0;
-  --g3: #4b7bef;
-  --accent: #5a63e0;
-  --accent-soft: rgba(90, 99, 224, 0.16);
-  --gradient: linear-gradient(120deg, var(--g1), var(--g2) 55%, var(--g3));
+  --g3: #3b82f6;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-soft: rgba(99, 102, 241, 0.16);
+  --gradient: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #3b82f6 100%);
+  --gradient-glow: linear-gradient(135deg, rgba(129, 140, 248, 0.4) 0%, rgba(99, 102, 241, 0.2) 50%, rgba(59, 130, 246, 0.4) 100%);
 
-  /* Dark theme (default) — comfortable elevated dark, not near-black */
-  --bg: #161922;
-  --bg-2: #1b1f2b;
-  --surface: rgba(40, 46, 64, 0.55);
-  --surface-solid: #212636;
-  --surface-hover: rgba(54, 62, 84, 0.6);
-  --text: #eef0f6;
-  --muted: #8b93a5;
-  --line: rgba(200, 212, 240, 0.08);
-  --line-strong: rgba(200, 212, 240, 0.15);
-  --danger: #f75c68;
-  --success: #33d69f;
+  /* Dark theme (default) — Ultra-clean deep slate */
+  --bg: #0b0d14;
+  --bg-2: #121520;
+  --surface: rgba(22, 27, 40, 0.72);
+  --surface-solid: #161b28;
+  --surface-hover: rgba(32, 38, 56, 0.85);
+  --text: #f8fafc;
+  --text-dim: #cbd5e1;
+  --muted: #94a3b8;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --danger: #ef4444;
+  --success: #10b981;
 
-  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.36);
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.48);
-  --glow: 0 0 40px rgba(90, 99, 224, 0.40);
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --glow: 0 0 50px rgba(99, 102, 241, 0.35);
   --radius: 20px;
   --radius-sm: 12px;
-  --container: 1200px;
-  --nav-h: 74px;
+  --container: 1240px;
+  --nav-h: 76px;
 
   --font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -48,23 +51,24 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  /* Deeper indigo accent + darkened semantics so text/buttons clear AA on white */
-  --accent: #4850d8;
-  --accent-soft: rgba(72, 80, 216, 0.10);
-  --bg: #f7f8fb;
-  --bg-2: #eef0f6;
-  --surface: rgba(255, 255, 255, 0.72);
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-soft: rgba(79, 70, 229, 0.10);
+  --bg: #f8fafc;
+  --bg-2: #f1f5f9;
+  --surface: rgba(255, 255, 255, 0.9);
   --surface-solid: #ffffff;
-  --surface-hover: rgba(72, 80, 216, 0.05);
-  --text: #12151d;
-  --muted: #596273;
-  --line: rgba(20, 24, 42, 0.10);
-  --line-strong: rgba(20, 24, 42, 0.16);
-  --danger: #cf2e39;
-  --success: #0a8055;
-  --shadow-sm: 0 6px 20px rgba(30, 34, 64, 0.08);
-  --shadow: 0 24px 60px rgba(30, 34, 64, 0.14);
-  --glow: 0 0 40px rgba(72, 80, 216, 0.22);
+  --surface-hover: rgba(241, 245, 249, 0.95);
+  --text: #0f172a;
+  --text-dim: #1e293b;
+  --muted: #475569;
+  --line: rgba(15, 23, 42, 0.08);
+  --line-strong: rgba(15, 23, 42, 0.14);
+  --danger: #dc2626;
+  --success: #059669;
+  --shadow-sm: 0 4px 20px rgba(15, 23, 42, 0.06);
+  --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+  --glow: 0 0 40px rgba(79, 70, 229, 0.18);
 }
 
 html {
@@ -75,26 +79,26 @@ html {
 
 body {
   min-height: 100vh;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+    radial-gradient(at 85% 25%, rgba(139, 92, 246, 0.12) 0px, transparent 45%),
+    radial-gradient(at 50% 80%, rgba(16, 185, 129, 0.05) 0px, transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-/* Background image — swap client/public/bg.svg with your own picture */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background: url('/bg.svg') center / cover no-repeat;
-  pointer-events: none;
-}
-
-/* Light theme: fade the dark background image so light mode stays clean */
-:root[data-theme='light'] body::before {
-  opacity: 0.06;
+:root[data-theme='light'] body {
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
+    radial-gradient(at 85% 25%, rgba(139, 92, 246, 0.04) 0px, transparent 45%),
+    radial-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 30px 30px;
 }
 
 a { color: inherit; text-decoration: none; }

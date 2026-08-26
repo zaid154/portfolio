@@ -1,18 +1,19 @@
-import { Layers, MonitorSmartphone, Server, LayoutDashboard, Code2, Sparkles, Rocket } from 'lucide-react'
+import { Layers, MonitorSmartphone, Server, LayoutDashboard, Code2, Sparkles, Rocket, Zap, Radio } from 'lucide-react'
 
 // Nav section anchors are structural (they must match each <section> id); only the
 // visible LABEL comes from the CMS (siteText), so nothing here is hardcoded copy.
 export const NAV = [
-  { id: 'work', key: 'navWork' },
-  { id: 'skills', key: 'navSkills' },
-  { id: 'services', key: 'navServices' },
-  { id: 'about', key: 'navAbout' },
-  { id: 'contact', key: 'navContact' },
+  { id: 'work', key: 'navWork', label: 'Work' },
+  { id: 'skills', key: 'navSkills', label: 'Skills' },
+  { id: 'experience', key: 'navExperience', label: 'Experience' },
+  { id: 'services', key: 'navServices', label: 'Services' },
+  { id: 'about', key: 'navAbout', label: 'About' },
+  { id: 'contact', key: 'navContact', label: 'Contact' },
 ]
 // Stable reference so useScrollSpy's effect doesn't re-subscribe on every render.
 export const NAV_IDS = NAV.map((n) => n.id)
 
-export const SERVICE_ICONS = { Layers, MonitorSmartphone, Server, LayoutDashboard, Code2, Code: Code2, Sparkles, Rocket }
+export const SERVICE_ICONS = { Layers, MonitorSmartphone, Server, LayoutDashboard, Code2, Code: Code2, Sparkles, Rocket, Zap, Radio }
 
 export const initials = (name = '') => name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase()
 

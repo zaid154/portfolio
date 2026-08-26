@@ -40,12 +40,12 @@ const items = [
     order: 1,
     featured: true,
     data: {
-      badge: 'Open to Full-Time & Internship Opportunities',
+      badge: 'Available for Full-Time Roles · Open to Work',
       eyebrow: 'Full Stack MERN Developer',
       headline: 'Building modern MERN web applications.',
       roles: ['Full Stack Developer', 'MERN Stack Developer', 'React Developer', 'Node.js Developer'],
       description:
-        "I'm a BCA final semester student at IGNOU and a Full Stack MERN Developer Intern at Humanoid Maker. I enjoy building responsive user interfaces, secure backend APIs, and scalable web applications using React, Node.js, Express.js, and MongoDB.",
+        "Full Stack MERN Developer with completed internship experience at Humanoid Maker. I build high-performance web applications, secure REST APIs, and scalable architectures with React, Node.js, Express.js, and MongoDB.",
       primaryCta: 'View Projects',
       secondaryCta: 'Contact Me',
       floatOne: 'MERN Stack',
@@ -55,9 +55,9 @@ const items = [
   },
 
   // ── Stats ────────────────────────────────────────────────────────────────────
-  { type: 'stat', title: '22+', order: 1, data: { value: '22+', label: 'Projects Completed' } },
+  { type: 'stat', title: '11+', order: 1, data: { value: '11+', label: 'Projects Completed' } },
   { type: 'stat', title: '15+', order: 2, data: { value: '15+', label: 'Technologies' } },
-  { type: 'stat', title: '1', order: 3, data: { value: '1', label: 'Internship' } },
+  { type: 'stat', title: '1', order: 3, data: { value: '1', label: 'Internship Completed' } },
   { type: 'stat', title: '100%', order: 4, data: { value: '100%', label: 'Dedication' } },
 
   // ── About ────────────────────────────────────────────────────────────────────
@@ -67,7 +67,7 @@ const items = [
     order: 1,
     data: {
       summary:
-        "I'm a Full Stack MERN Developer with a strong interest in building modern, responsive, and scalable web applications. I have completed my Bachelor of Computer Applications (BCA) examinations at IGNOU and am currently awaiting the final results. During my internship at Humanoid Maker, I worked on real-world MERN applications, focusing on clean architecture, secure backend APIs, and intuitive user experiences. I'm passionate about continuous learning and enjoy turning ideas into production-ready solutions.",
+        "I'm a Full Stack MERN Developer with proven production experience delivering full-cycle web applications. Having completed my internship at Humanoid Maker, I specialize in engineering modular MERN architectures, sub-second API performance, Redis caching, and real-time communication systems. I hold a Bachelor of Computer Applications (BCA) from IGNOU (70.17%) and am actively seeking full-time software engineering roles.",
       highlights: [
         'Full Stack MERN Development',
         'React.js & Node.js',
@@ -127,7 +127,7 @@ const items = [
     featured: true,
     data: {
       description:
-        'Built a full-stack MERN-based AI-powered digital study marketplace where students can discover, purchase, and manage notes, books, assignments, academic projects, and help books. The platform features secure JWT authentication, email verification and password recovery using Resend, category-based browsing, advanced search and filtering, shopping cart, secure checkout, order management, an admin dashboard, AI-powered note generation, an intelligent chat assistant, note summarization, flashcard generation, and a responsive user experience.',
+        'AI-Powered Study Material Marketplace — Created academic notes marketplace with Razorpay checkout and protected PDF preview capabilities. Leveraged Gemini AI to generate automated chapter summaries, key takeaways, and flashcards.',
       image: 'https://res.cloudinary.com/uvxhwkuo/image/upload/v1783331196/portfolio-cms/notegenie.png',
       stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Razorpay', 'Gemini AI', 'Resend', 'Vercel', 'Render'],
       liveUrl: '',
@@ -141,7 +141,7 @@ const items = [
     featured: true,
     data: {
       description:
-        'Built a full-featured MERN e-commerce platform with 70+ product listings, featuring advanced search and filtering, shopping cart, wishlist, secure checkout (Razorpay & Cash on Delivery), order tracking, returns, invoicing, and inventory management. Implemented JWT authentication, OTP verification via Gmail SMTP, and role-based access control for secure user and admin operations. Deployed the application using Vercel and Render with a scalable production-ready architecture.',
+        'Multi-Vendor E-Commerce Platform — Built full-stack marketplace with JWT auth, indexed MongoDB schemas, multi-filter search, and cart. Integrated Razorpay payment gateway, automated GST invoicing, and a centralized vendor admin panel.',
       image: '/images/nexamart.png',
       stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Razorpay', 'Nodemailer', 'Vercel', 'Render'],
       liveUrl: '',
@@ -155,7 +155,7 @@ const items = [
     featured: true,
     data: {
       description:
-        'AI-powered mock interview and skill assessment platform with real-time Google Gemini 2.5 AI evaluation, live scoring, open-ended question grading with line-by-line feedback, auto-scored technical quizzes, resume PDF parsing with stack-tailored question generation, and admin-managed milestone certificates with public credential verification.',
+        'AI Interview Preparation Platform — Parsed candidate resumes to dynamically generate personalized, role-specific technical questions. Integrated Gemini API with structured prompt evaluation, real-time candidate scoring, and feedback.',
       image: '',
       stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'Google Gemini AI', 'MongoDB', 'JWT', 'Vercel'],
       liveUrl: 'https://ai-mock-interview-three-pi.vercel.app/',
@@ -164,12 +164,12 @@ const items = [
   },
   {
     type: 'project',
-    title: 'ATS Resume Builder & Analyzer',
+    title: 'ATS Resume Builder and Analyzer',
     order: 4,
     featured: true,
     data: {
       description:
-        'Production-grade ATS resume creation and scoring platform featuring 16+ ATS-compliant templates, real-time heuristic ATS scoring engine (0–100%), job description keyword diagnostics with missing term recommendations, drag-and-drop section reordering, interactive A4 canvas, and text-selectable vectorized PDF export with 100% parseability.',
+        'ATS Resume Editor & Scoring Engine — Engineered interactive resume editor featuring real-time ATS scoring, custom themes, and live preview. Implemented client-side state management with vector PDF generation for lossless formatting exports.',
       image: '',
       stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'MongoDB Atlas', 'Zod', 'Nodemailer', 'Tailwind CSS'],
       liveUrl: '',
@@ -220,22 +220,8 @@ const items = [
   },
   {
     type: 'project',
-    title: 'MZ Karigar',
-    order: 8,
-    featured: false,
-    data: {
-      description:
-        'Hyperlocal home services gig platform connecting urban households with verified local technicians (electricians, plumbers, mechanics, carpenters) within 30 minutes. Features upfront transparent rate cards, WhatsApp-first booking UX, technician partner registration, and instant payout workflows.',
-      image: '',
-      stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
-    },
-  },
-  {
-    type: 'project',
     title: 'Natifix',
-    order: 9,
+    order: 8,
     featured: true,
     data: {
       description:
@@ -248,36 +234,8 @@ const items = [
   },
   {
     type: 'project',
-    title: 'TenantSphere (.NET SaaS)',
-    order: 10,
-    featured: false,
-    data: {
-      description:
-        'Enterprise Multi-Tenant B2B SaaS architecture engineered with ASP.NET Core 8 Web API, Clean Architecture, CQRS with MediatR, Entity Framework Core 8, Dapper high-speed reads, Redis distributed caching, and dynamic tenant isolation with global query filters.',
-      image: '',
-      stack: ['ASP.NET Core 8', 'C#', 'Clean Architecture', 'CQRS', 'MediatR', 'EF Core', 'Redis', 'React 18'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
-    },
-  },
-  {
-    type: 'project',
-    title: 'AI Image Generator',
-    order: 11,
-    featured: false,
-    data: {
-      description:
-        'Full-stack AI image generation web application allowing users to turn natural language prompts into high-resolution images. Features prompt customization, generation history, instant image downloads, and responsive design.',
-      image: '',
-      stack: ['React.js', 'Node.js', 'Express.js', 'OpenAI API', 'REST API'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
-    },
-  },
-  {
-    type: 'project',
     title: 'YumRun Food Delivery',
-    order: 12,
+    order: 9,
     featured: false,
     data: {
       description:
@@ -290,64 +248,8 @@ const items = [
   },
   {
     type: 'project',
-    title: 'QuizMaster Platform',
-    order: 13,
-    featured: false,
-    data: {
-      description:
-        'Dynamic quiz and assessment platform featuring timed questions, multi-domain categories (Frontend, Backend, Aptitude), instant score calculation, detailed solution reviews, and progress tracking.',
-      image: '',
-      stack: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'Razorpay', 'Tailwind CSS'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
-    },
-  },
-  {
-    type: 'project',
-    title: 'TaskFlow MERN Task Manager',
-    order: 14,
-    featured: false,
-    data: {
-      description:
-        'Full-stack productivity tool with CRUD task capabilities, priority tags, status filtering (Active, Completed, Overdue), search, and persistent database storage with JWT authentication.',
-      image: '/images/todo.png',
-      stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
-    },
-  },
-  {
-    type: 'project',
-    title: 'Flipkart Clone',
-    order: 15,
-    featured: false,
-    data: {
-      description:
-        'Responsive e-commerce frontend replica replicating Flipkart’s browsing experience, multi-level category navigation, product detail views, deal banners, and stateful cart management.',
-      image: '',
-      stack: ['React.js', 'Vite', 'Tailwind CSS', 'Redux Toolkit'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
-    },
-  },
-  {
-    type: 'project',
-    title: 'MovieSphere Discovery',
-    order: 16,
-    featured: false,
-    data: {
-      description:
-        'Dynamic movie search and discovery web application consuming TMDB API with real-time keyword search, genre filtering, modal previews, and responsive movie cards.',
-      image: '',
-      stack: ['React.js', 'Tailwind CSS', 'TMDB API', 'JavaScript'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
-    },
-  },
-  {
-    type: 'project',
     title: 'TrendyKart .NET Store',
-    order: 17,
+    order: 10,
     featured: false,
     data: {
       description:
@@ -361,7 +263,7 @@ const items = [
   {
     type: 'project',
     title: 'Interactive Proposal App',
-    order: 18,
+    order: 11,
     featured: false,
     data: {
       description:
@@ -372,10 +274,103 @@ const items = [
       githubUrl: 'https://github.com/zaid154',
     },
   },
+
+  // ── Hidden / Draft Projects (Saved in CMS but hidden from public) ───────────
+  {
+    type: 'project',
+    title: 'MZ Karigar',
+    status: 'draft',
+    order: 90,
+    featured: false,
+    data: {
+      description:
+        'Hyperlocal home services gig platform connecting urban households with verified local technicians (electricians, plumbers, mechanics, carpenters) within 30 minutes. Features upfront transparent rate cards, WhatsApp-first booking UX, technician partner registration, and instant payout workflows.',
+      image: '',
+      stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'TenantSphere (.NET SaaS)',
+    status: 'draft',
+    order: 91,
+    featured: false,
+    data: {
+      description:
+        'Enterprise Multi-Tenant B2B SaaS architecture engineered with ASP.NET Core 8 Web API, Clean Architecture, CQRS with MediatR, Entity Framework Core 8, Dapper high-speed reads, Redis distributed caching, and dynamic tenant isolation with global query filters.',
+      image: '',
+      stack: ['ASP.NET Core 8', 'C#', 'Clean Architecture', 'CQRS', 'MediatR', 'EF Core', 'Redis', 'React 18'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'AI Image Generator',
+    status: 'draft',
+    order: 92,
+    featured: false,
+    data: {
+      description:
+        'Full-stack AI image generation web application allowing users to turn natural language prompts into high-resolution images. Features prompt customization, generation history, instant image downloads, and responsive design.',
+      image: '',
+      stack: ['React.js', 'Node.js', 'Express.js', 'OpenAI API', 'REST API'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'QuizMaster Platform',
+    status: 'draft',
+    order: 93,
+    featured: false,
+    data: {
+      description:
+        'Dynamic quiz and assessment platform featuring timed questions, multi-domain categories (Frontend, Backend, Aptitude), instant score calculation, detailed solution reviews, and progress tracking.',
+      image: '',
+      stack: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'Razorpay', 'Tailwind CSS'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'TaskFlow MERN Task Manager',
+    status: 'draft',
+    order: 94,
+    featured: false,
+    data: {
+      description:
+        'Full-stack productivity tool with CRUD task capabilities, priority tags, status filtering (Active, Completed, Overdue), search, and persistent database storage with JWT authentication.',
+      image: '/images/todo.png',
+      stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
+  {
+    type: 'project',
+    title: 'University Portal Website',
+    status: 'draft',
+    order: 95,
+    featured: false,
+    data: {
+      description:
+        'Responsive higher education institution website template featuring academic course outlines, department overviews, campus admissions information, and contact inquiry forms.',
+      image: '',
+      stack: ['HTML5', 'CSS3', 'JavaScript'],
+      liveUrl: '',
+      githubUrl: 'https://github.com/zaid154',
+    },
+  },
   {
     type: 'project',
     title: 'Color Palette & Gradient Studio',
-    order: 19,
+    status: 'draft',
+    order: 96,
     featured: false,
     data: {
       description:
@@ -389,7 +384,8 @@ const items = [
   {
     type: 'project',
     title: 'Number Guessing Arena',
-    order: 20,
+    status: 'draft',
+    order: 97,
     featured: false,
     data: {
       description:
@@ -403,7 +399,8 @@ const items = [
   {
     type: 'project',
     title: 'Neumorphic Web Calculator',
-    order: 21,
+    status: 'draft',
+    order: 98,
     featured: false,
     data: {
       description:
@@ -414,37 +411,22 @@ const items = [
       githubUrl: 'https://github.com/zaid154',
     },
   },
-  {
-    type: 'project',
-    title: 'University Portal Website',
-    order: 22,
-    featured: false,
-    data: {
-      description:
-        'Responsive higher education institution website template featuring academic course outlines, department overviews, campus admissions information, and contact inquiry forms.',
-      image: '',
-      stack: ['HTML5', 'CSS3', 'JavaScript'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
-    },
-  },
 
   // ── Experience ───────────────────────────────────────────────────────────────
   {
     type: 'experience',
-    title: 'Full Stack MERN Developer Intern',
+    title: 'Full Stack Developer Intern',
     order: 1,
     data: {
       company: 'Humanoid Maker',
-      period: 'May 2026 – Present',
+      period: 'April 2026 – August 2026 (Completed · Delhi, India)',
       description:
-        'Working as a Full Stack MERN Developer Intern, contributing to the development of modern web applications with a focus on responsive user interfaces, secure backend systems, and scalable application architecture.',
+        'Architected scalable web applications, real-time communication systems, and video streaming pipelines with high reliability and performance.',
       points: [
-        'Developing responsive user interfaces using React.js and Tailwind CSS.',
-        'Building and integrating RESTful APIs with Node.js, Express.js, and MongoDB.',
-        'Implementing secure authentication using JWT and Firebase Authentication.',
-        'Integrating Cloudinary for media management and Resend for email services.',
-        'Collaborating with the team using Git and GitHub while following clean coding practices.',
+        'Performance & Security: Decreased database load by 60% and API latency by 45% using Redis caching; enforced JWT authentication, Role-Based Access Control (RBAC), and wrote Jest test suites.',
+        'OTT Video Streaming: Built streaming pipeline with chunked media delivery and adaptive bitrate playback (HLS), reducing initial buffering latency by 35% across active streams.',
+        'Real-Time Platform (Wisp): Implemented WebRTC for audio/video calling and Socket.IO for real-time messaging, live user presence indicators, and instant event notifications.',
+        'E-Commerce Architecture: Engineered scalable marketplace for 50+ merchants, handling dynamic product catalogs, order workflows, and admin dashboards via MERN stack.',
       ],
     },
   },
@@ -455,20 +437,51 @@ const items = [
     title: 'Bachelor of Computer Applications (BCA)',
     order: 1,
     data: {
-      institution: 'Indira Gandhi National Open University (IGNOU), New Delhi',
+      institution: 'Indira Gandhi National Open University (IGNOU), Delhi',
       period: '2023 – 2026',
       description:
-        'Completed the Bachelor of Computer Applications (BCA) program with a focus on programming, database management, software engineering, web development, and computer science fundamentals. Final semester examinations completed; result awaited.',
+        'Final Semester (Result Awaited) | Aggregate: 70.17%. Focused on full-stack web development, data structures, database management systems (DBMS), software engineering, and system design.',
+    },
+  },
+  {
+    type: 'education',
+    title: 'Senior Secondary (12th) & Secondary (10th) School',
+    order: 2,
+    data: {
+      institution: 'SBV B1 Yamuna Vihar, Delhi',
+      period: '2021 – 2023',
+      description:
+        'Completed Grade 12 (Senior Secondary, 2023) and Grade 10 (Secondary School, 2021) with strong academic foundation in Computer Science & Science.',
     },
   },
 
   // ── Certificates ─────────────────────────────────────────────────────────────
   {
     type: 'certificate',
-    title: 'AI for All',
+    title: 'Fundamentals of Remote Sensing',
     order: 1,
     data: {
-      issuer: 'Intel & Skill India',
+      issuer: 'NASA Applied Remote Sensing Training (ARSET)',
+      date: 'Aug 2026',
+      credentialUrl: '',
+    },
+  },
+  {
+    type: 'certificate',
+    title: 'English, Digital Skills & Workplace Readiness',
+    order: 2,
+    data: {
+      issuer: 'Freedom Employability Academy (FEA)',
+      date: 'Oct 2025',
+      credentialUrl: 'https://res.cloudinary.com/uvxhwkuo/image/upload/v1783509362/FEA_nbp9ft.pdf',
+    },
+  },
+  {
+    type: 'certificate',
+    title: 'Artificial Intelligence for All',
+    order: 3,
+    data: {
+      issuer: 'Intel & Skill India Digital Hub',
       date: 'Jul 2025',
       credentialUrl: 'https://res.cloudinary.com/uvxhwkuo/image/upload/v1783509362/AI_For_All_zduudf.pdf',
     },
@@ -476,7 +489,7 @@ const items = [
   {
     type: 'certificate',
     title: 'Program in Cyber Awareness AI Basic',
-    order: 2,
+    order: 4,
     data: {
       issuer: 'NIIT Foundation & Skill India',
       date: 'Jul 2025',
@@ -486,7 +499,7 @@ const items = [
   {
     type: 'certificate',
     title: 'Exploring Computers',
-    order: 3,
+    order: 5,
     data: {
       issuer: 'Infosys Springboard',
       date: 'Jul 2025',
@@ -495,12 +508,12 @@ const items = [
   },
   {
     type: 'certificate',
-    title: 'Freedom Employability Academy',
-    order: 4,
+    title: 'Talent Hunt Competition',
+    order: 6,
     data: {
-      issuer: 'Freedom Employability Academy',
-      date: 'Oct 2025',
-      credentialUrl: 'https://res.cloudinary.com/uvxhwkuo/image/upload/v1783509362/FEA_nbp9ft.pdf',
+      issuer: 'PC Training Institute Limited',
+      date: 'Jun 2025',
+      credentialUrl: '',
     },
   },
 
@@ -531,33 +544,43 @@ const items = [
   // ── Services ─────────────────────────────────────────────────────────────────
   {
     type: 'service',
-    title: 'MERN Stack Development',
+    title: 'Full-Stack Web Engineering',
     order: 1,
-    data: { description: 'Build fast, secure, and scalable full-stack web applications using React, Node.js, Express.js, and MongoDB.', icon: 'Code' },
+    data: {
+      description:
+        'Architecting robust end-to-end web applications with React 19, Node.js, Express.js, and MongoDB. Modern responsive design, state management, and high-quality UX.',
+      icon: 'Code2',
+    },
   },
   {
     type: 'service',
-    title: 'AI-Powered Applications',
+    title: 'Scalable APIs & Backend Architecture',
     order: 2,
-    data: { description: 'Add AI features like chat assistants, content generation, note summaries, and flashcards to modern web applications.', icon: 'Sparkles' },
+    data: {
+      description:
+        'Designing secure RESTful APIs with JWT authentication, RBAC authorization, MongoDB Atlas indexing, and Redis caching for 45% lower latency.',
+      icon: 'Server',
+    },
   },
   {
     type: 'service',
-    title: 'REST API Development',
+    title: 'Real-Time Communication & Streaming',
     order: 3,
-    data: { description: 'Design and develop secure REST APIs with authentication, authorization, and database integration.', icon: 'Server' },
+    data: {
+      description:
+        'Building WebRTC peer-to-peer audio/video calling, Socket.IO live messaging and notifications, and adaptive HLS video streaming pipelines.',
+      icon: 'Layers',
+    },
   },
   {
     type: 'service',
-    title: 'Admin Dashboard Development',
+    title: 'AI Integrations & Intelligent Tools',
     order: 4,
-    data: { description: 'Create powerful admin panels for managing users, products, orders, content, and application settings.', icon: 'LayoutDashboard' },
-  },
-  {
-    type: 'service',
-    title: 'Deployment & Support',
-    order: 5,
-    data: { description: 'Deploy applications on Vercel and Render with proper environment configuration and ongoing maintenance.', icon: 'Rocket' },
+    data: {
+      description:
+        'Integrating Google Gemini AI and LLM APIs for automated resume analysis, smart summarization, conversational assistants, and prompt engineering.',
+      icon: 'Sparkles',
+    },
   },
 
   // ── Contact ──────────────────────────────────────────────────────────────────
@@ -573,7 +596,7 @@ const items = [
     type: 'resume',
     title: 'Resume',
     order: 1,
-    data: { url: 'https://res.cloudinary.com/uvxhwkuo/raw/upload/v1783331207/portfolio-cms/resume.pdf', label: 'Download Resume' },
+    data: { url: '/resume.pdf', label: 'Download Resume' },
   },
 
   // ── Social links ─────────────────────────────────────────────────────────────
@@ -609,6 +632,10 @@ const items = [
       skillsTitle: 'Technologies I *Work With*',
       servicesEyebrow: 'Services',
       servicesTitle: 'What I *Build*',
+      experienceEyebrow: 'Career Path',
+      experienceTitle: 'Experience & *Education*',
+      experienceColTitle: 'Work Experience',
+      educationColTitle: 'Education & Certifications',
       aboutEyebrow: 'About',
       aboutTitle: 'Know More *About Me*',
       testimonialsEyebrow: 'Testimonials',
@@ -618,8 +645,6 @@ const items = [
       contactEyebrow: 'Contact',
       contactTitle: "Let's *Connect*",
       contactSubtitle: 'Have a project, an idea, or an opportunity? Feel free to get in touch.',
-      experienceTitle: 'Experience',
-      educationTitle: 'Education & Certifications',
       liveLabel: 'Live Demo',
       codeLabel: 'Source Code',
       detailsLabel: 'View Details',
@@ -629,6 +654,7 @@ const items = [
       // Navigation labels (anchors are fixed in code; only the text is editable)
       navWork: 'Work',
       navSkills: 'Skills',
+      navExperience: 'Experience',
       navServices: 'Services',
       navAbout: 'About',
       navContact: 'Contact',

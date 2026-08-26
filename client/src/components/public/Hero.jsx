@@ -35,18 +35,26 @@ export default function Hero({ site }) {
   const resume = first(site, 'resume').data
   const roles = asArray(hero.data.roles)
   const role = useTypewriter(roles)
-  const quickStats = (site.stat || []).slice(0, 3)
+  const quickStats = (site.stat || []).slice(0, 4)
 
   return (
     <header className="hero" id="home">
-      <div>
+      <div className="hero-content">
         {hero.data.badge && (
-          <motion.span className="hero-badge" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-            <span className="dot" /> {hero.data.badge}
-          </motion.span>
+          <motion.div className="hero-badge-wrap" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+            <span className="hero-badge">
+              <span className="live-dot-container">
+                <span className="dot-ping" />
+                <span className="dot" />
+              </span>
+              {hero.data.badge}
+            </span>
+          </motion.div>
         )}
         {hero.data.eyebrow && (
-          <motion.span className="eyebrow hero-eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.12 }}>{hero.data.eyebrow}</motion.span>
+          <motion.span className="eyebrow hero-eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.12 }}>
+            {hero.data.eyebrow}
+          </motion.span>
         )}
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
           <Heading>{hero.data.headline}</Heading>
@@ -55,14 +63,21 @@ export default function Hero({ site }) {
         <motion.p className="lead" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
           {hero.data.description}
         </motion.p>
+
+        {/* Action Buttons */}
         <motion.div className="hero-actions" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
-          <a href="#work" className="btn primary">{hero.data.primaryCta} <ArrowRight size={18} /></a>
+          <a href="#work" className="btn primary hero-primary-btn">{hero.data.primaryCta} <ArrowRight size={18} /></a>
           {hero.data.secondaryCta && <a href="#contact" className="btn ghost">{hero.data.secondaryCta}</a>}
           {resume.url && <a href={resume.url} target="_blank" rel="noreferrer" className="btn ghost"><Download size={17} /> {resume.label}</a>}
         </motion.div>
-        <motion.div className="hero-quickstats" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+
+        {/* Quick Stats Grid */}
+        <motion.div className="hero-quickstats" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }}>
           {quickStats.map((s) => (
-            <div className="qs" key={s._id}><strong>{s.data.value || s.title}</strong><span>{s.data.label}</span></div>
+            <div className="qs glass" key={s._id}>
+              <strong>{s.data.value || s.title}</strong>
+              <span>{s.data.label}</span>
+            </div>
           ))}
         </motion.div>
       </div>
@@ -70,18 +85,19 @@ export default function Hero({ site }) {
       <motion.div className="hero-visual" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.7 }}>
         <span className="hero-orb a" />
         <span className="hero-orb b" />
-        <div className="hero-photo">
-          {/* The only above-the-fold image on the page — eager + high priority. */}
-          {hero.data.image && (
-            <Img
-              src={hero.data.image}
-              alt={hero.title}
-              width={560}
-              height={700}
-              priority
-              sizes="(max-width: 900px) 280px, 360px"
-            />
-          )}
+        <div className="hero-photo-ring">
+          <div className="hero-photo">
+            {hero.data.image && (
+              <Img
+                src={hero.data.image}
+                alt={hero.title}
+                width={560}
+                height={700}
+                priority
+                sizes="(max-width: 900px) 280px, 360px"
+              />
+            )}
+          </div>
         </div>
         {hero.data.floatOne && (
           <motion.div className="hero-float top glass" animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }}>

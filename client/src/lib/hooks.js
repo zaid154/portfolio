@@ -145,9 +145,9 @@ export function useSite() {
   }
 }
 
-// Persisted dark/light theme, defaults to dark for the premium look.
+// Persisted dark/light theme, defaults to light (white).
 export function useTheme() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio_theme') || 'dark')
+  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio_theme') || 'light')
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme

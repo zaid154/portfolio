@@ -1,30 +1,24 @@
-import { CheckCircle2, ExternalLink } from 'lucide-react'
-import { first, asArray, text } from '../../lib/site'
+import { asArray, text } from '../../lib/site'
 import { Reveal } from '../ui'
-import Img from '../Img'
 import { Heading } from './shared'
 
 export default function Timeline({ site }) {
-  const about = first(site, 'about').data
   const exp = site.experience || []
   const edu = [...(site.education || []), ...(site.certificate || [])]
-  const highlights = asArray(about.highlights)
+
+  if (!exp.length && !edu.length) return null
+
   return (
-    <section className="section" id="about">
+    <section className="section" id="experience">
       <div className="container">
         <Reveal className="section-head">
-          <span className="eyebrow">{text(site, 'aboutEyebrow')}</span>
-          <h2><Heading>{text(site, 'aboutTitle')}</Heading></h2>
-          {about.summary && <p>{about.summary}</p>}
+          <span className="eyebrow">{text(site, 'experienceEyebrow', 'Career Path')}</span>
+          <h2><Heading>{text(site, 'experienceTitle', 'Experience & *Education*')}</Heading></h2>
         </Reveal>
-        {highlights.length > 0 && (
-          <Reveal className="about-highlights">
-            {highlights.map((h) => <span key={h}><CheckCircle2 size={16} /> {h}</span>)}
-          </Reveal>
-        )}
+
         <div className="timeline-wrap">
           <Reveal className="timeline-col">
-            <h3 className="col-title">{text(site, 'experienceTitle')}</h3>
+            <h3 className="col-title">{text(site, 'experienceColTitle') || 'Work Experience'}</h3>
             <div className="timeline">
               {exp.map((item) => (
                 <div className="timeline-item" key={item._id}>
@@ -39,21 +33,16 @@ export default function Timeline({ site }) {
               ))}
             </div>
           </Reveal>
+
           <Reveal className="timeline-col" delay={0.1}>
-            <h3 className="col-title">{text(site, 'educationTitle')}</h3>
+            <h3 className="col-title">{text(site, 'educationColTitle') || 'Education & Certifications'}</h3>
             <div className="timeline">
               {edu.map((item) => (
                 <div className="timeline-item" key={item._id}>
                   <span className="period">{item.data.period || item.data.date}</span>
-                  <h4>
-                    {item.data.image && <Img className="tl-logo" src={item.data.image} alt="" width={48} height={48} />}
-                    {item.title}
-                  </h4>
+                  <h4>{item.title}</h4>
                   <span className="org">{item.data.institution || item.data.issuer}</span>
                   {item.data.description && <p>{item.data.description}</p>}
-                  {item.data.credentialUrl && item.data.credentialUrl !== '#' && (
-                    <a className="tl-link" href={item.data.credentialUrl} target="_blank" rel="noreferrer">{text(site, 'viewCredentialLabel')} <ExternalLink size={13} /></a>
-                  )}
                 </div>
               ))}
             </div>

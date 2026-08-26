@@ -52,9 +52,11 @@
               document.head.appendChild(link)
             })
           }
-        } catch (e) {
-          /* storage blocked (Safari private mode) — skip the warm-up */
-        }
+        try {
+          var t = window.localStorage.getItem('portfolio_theme') || 'light'
+          document.documentElement.dataset.theme = t
+          if (t === 'dark') document.body.classList.add('dark')
+        } catch (e) {}
       })()
     </script>
 

@@ -56,7 +56,14 @@ export default function Dashboard({ theme, toggleTheme }) {
   }, [])
 
   const active = contentTypes.find((t) => t.key === activeType)
-  const typed = items.filter((i) => i.type === activeType)
+  const typed = items
+    .filter((i) => i.type === activeType)
+    .sort((a, b) => {
+      const aPub = a.status === 'published' ? 0 : 1
+      const bPub = b.status === 'published' ? 0 : 1
+      if (aPub !== bPub) return aPub - bPub
+      return (a.order ?? 0) - (b.order ?? 0)
+    })
   const visible = query
     ? typed.filter((i) => `${i.title} ${JSON.stringify(i.data || {})}`.toLowerCase().includes(query.toLowerCase()))
     : typed
@@ -94,7 +101,9 @@ export default function Dashboard({ theme, toggleTheme }) {
   }
   async function toggleStatus(entry) {
     try {
-      await api.put(`/admin/content/${entry._id}`, { status: entry.status === 'published' ? 'draft' : 'published' })
+      const nextStatus = entry.status === 'published' ? 'draft' : 'published'
+      await api.put(`/admin/content/${entry._id}`, { status: nextStatus })
+      toast.success(nextStatus === 'published' ? 'Published' : 'Hidden (moved to bottom)')
       load()
     } catch (err) { toast.error(getErrorMessage(err)) }
   }
@@ -175,23 +184,24 @@ export default function Dashboard({ theme, toggleTheme }) {
             <div className="list">
               {visible.map((item, i) => {
                 const img = rowThumb(item)
+                const isDraft = item.status !== 'published'
                 return (
-                  <div key={item._id} className={editing?._id === item._id ? 'row active' : 'row'}>
+                  <div key={item._id} className={`${editing?._id === item._id ? 'row active' : 'row'} ${isDraft ? 'row-hidden' : ''}`}>
                     <button className="row-main" onClick={() => selectEntry(item)}>
                       {img ? <img className="row-thumb" src={img} alt="" /> : <span className="row-thumb ph"><FileStack size={14} /></span>}
                       <span className="row-text">
                         <span className="row-title">{item.title || '(untitled)'}</span>
-                        <small>order {item.order}</small>
+                        <small>{isDraft ? 'hidden (draft)' : `order ${item.order}`}</small>
                       </span>
                     </button>
                     <div className="row-tools">
-                      <button className={item.status === 'published' ? 'pubtog on' : 'pubtog'} title={item.status === 'published' ? 'Published — click to hide' : 'Draft — click to publish'} onClick={() => toggleStatus(item)}>
+                      <button className={item.status === 'published' ? 'pubtog on' : 'pubtog'} title={item.status === 'published' ? 'Published — click to hide' : 'Hidden — click to publish'} onClick={() => toggleStatus(item)}>
                         {item.status === 'published' ? <Eye size={14} /> : <EyeOff size={14} />}
                       </button>
-                      {!query && (
+                      {!query && !isDraft && (
                         <span className="reorder">
                           <button disabled={i === 0} onClick={() => move(item, -1)} aria-label="Move up"><ChevronUp size={14} /></button>
-                          <button disabled={i === visible.length - 1} onClick={() => move(item, 1)} aria-label="Move down"><ChevronDown size={14} /></button>
+                          <button disabled={i === visible.filter(x => x.status === 'published').length - 1} onClick={() => move(item, 1)} aria-label="Move down"><ChevronDown size={14} /></button>
                         </span>
                       )}
                     </div>

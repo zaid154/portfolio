@@ -23,7 +23,7 @@ export default function Navbar({ site, settings, theme, toggleTheme }) {
         <a href="#home" className="brand"><span className="logo">{settings.logoImage ? <Img src={settings.logoImage} alt={settings.siteName} width={40} height={40} /> : settings.logoText}</span>{settings.siteName}</a>
         <div className="nav-links">
           {NAV.map((n) => (
-            <a key={n.id} href={`#${n.id}`} className={active === n.id ? 'active' : ''}>{text(site, n.key)}</a>
+            <a key={n.id} href={`#${n.id}`} className={active === n.id ? 'active' : ''}>{text(site, n.key, n.label)}</a>
           ))}
         </div>
         <div className="nav-actions">
@@ -41,10 +41,10 @@ export default function Navbar({ site, settings, theme, toggleTheme }) {
           <motion.div className="mobile-sheet" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
             <button className="icon-btn" style={{ position: 'absolute', top: 20, right: 20 }} onClick={() => setOpen(false)}><X size={20} /></button>
             {NAV.map((n) => (
-              <a key={n.id} href={`#${n.id}`} className={active === n.id ? 'active' : ''} onClick={() => setOpen(false)}>{text(site, n.key)}</a>
+              <a key={n.id} href={`#${n.id}`} className={active === n.id ? 'active' : ''} onClick={() => setOpen(false)}>{text(site, n.key, n.label)}</a>
             ))}
             <a href="#contact" onClick={() => setOpen(false)}>{cta}</a>
-            <Link to="/admin" onClick={() => setOpen(false)}>{text(site, 'navAdmin')}</Link>
+            <Link to="/admin" onClick={() => setOpen(false)}>{text(site, 'navAdmin', 'Admin')}</Link>
           </motion.div>
         )}
       </AnimatePresence>
