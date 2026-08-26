@@ -258,19 +258,157 @@
 .stat-tile .num .suffix { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .stat-tile .lbl { color: var(--muted); margin-top: 6px; font-size: 0.9rem; }
 
-/* -------- Projects -------- */
-.filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+/* -------- Projects Hub Controls -------- */
+.project-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.project-search-box {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+}
+.project-search-box input {
+  width: 100%;
+  padding: 13px 44px 13px 46px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+.project-search-box input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+.project-search-box .search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+.project-search-box .clear-search {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 50%;
+  transition: color 0.2s;
+}
+.project-search-box .clear-search:hover {
+  color: var(--text);
+}
+
+.filter-bar { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
 .filter-bar button {
-  padding: 9px 16px;
+  padding: 9px 18px;
   border-radius: 999px;
   border: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.88rem;
   font-weight: 500;
-  transition: all 0.2s;
+  background: var(--surface);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.filter-bar button:hover { color: var(--text); border-color: var(--line-strong); }
-.filter-bar button.active { color: #fff; background: var(--gradient); border-color: transparent; }
+.filter-bar button:hover { color: var(--text); border-color: var(--line-strong); transform: translateY(-1px); }
+.filter-bar button.active { color: #fff; background: var(--gradient); border-color: transparent; box-shadow: 0 6px 20px rgba(90, 99, 224, 0.35); }
+
+.project-results-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.active-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.badge-pill.featured {
+  background: rgba(254, 188, 46, 0.15);
+  color: #febc2e;
+  border: 1px solid rgba(254, 188, 46, 0.3);
+}
+.badge-pill.ai {
+  background: rgba(90, 99, 224, 0.15);
+  color: #7877f8;
+  border: 1px solid rgba(90, 99, 224, 0.3);
+}
+.badge-pill.realtime {
+  background: rgba(40, 200, 64, 0.15);
+  color: #28c840;
+  border: 1px solid rgba(40, 200, 64, 0.3);
+}
+
+.show-more-projects {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.load-more-btn {
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.load-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(90, 99, 224, 0.25);
+}
+
+.projects-empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  border-radius: 18px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
 
 /* Project screenshot showcase card - Clean frameless design */
 .project-card-media,
@@ -417,15 +555,43 @@
 }
 
 /* -------- Skills -------- */
-.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.skill-card { padding: 26px; border-radius: var(--radius); }
+/* -------- Skills -------- */
+.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.skill-card {
+  padding: 30px;
+  border-radius: calc(var(--radius) + 4px);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 24px 50px rgba(90, 99, 224, 0.2);
+}
 .skill-card .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.skill-card h3 { font-size: 1.15rem; }
-.skill-card .lvl { font-family: var(--font-mono); color: var(--accent); font-size: 0.85rem; }
-.skill-bar { height: 7px; border-radius: 999px; background: var(--line); overflow: hidden; }
-.skill-bar span { display: block; height: 100%; border-radius: 999px; background: var(--gradient); }
-.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-.skill-tags span { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; }
+.skill-card h3 { font-size: 1.22rem; font-weight: 700; }
+.skill-card .lvl { font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem; font-weight: 600; }
+.skill-bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.skill-bar span { display: block; height: 100%; border-radius: 999px; background: var(--gradient); box-shadow: 0 0 12px rgba(90, 99, 224, 0.5); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+.skill-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding: 6px 13px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+.skill-tags span:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
 
 /* -------- Timeline -------- */
 .timeline-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }

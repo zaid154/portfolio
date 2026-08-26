@@ -84,20 +84,38 @@ const items = [
   // 80). Keep it numeric so the bar renders meaningfully.
   {
     type: 'skill',
-    title: 'Frontend',
+    title: 'Frontend & UI Engineering',
     order: 1,
     data: {
-      level: '90',
-      skills: ['React.js', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite', 'React Router', 'Redux Toolkit'],
+      level: '95',
+      skills: ['React 19', 'JavaScript (ES6+)', 'Tailwind CSS v4', 'Redux Toolkit', 'Vite', 'React Router', 'Framer Motion', 'HTML5 & Modern CSS3', 'Responsive Design'],
     },
   },
   {
     type: 'skill',
-    title: 'Backend',
+    title: 'Backend & API Architecture',
     order: 2,
     data: {
-      level: '85',
-      skills: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'REST APIs', 'JWT Authentication', 'Firebase Authentication', 'Cloudinary', 'Resend', 'MongoDB Atlas', 'Render', 'Vercel'],
+      level: '90',
+      skills: ['Node.js', 'Express.js', 'RESTful APIs', 'JWT Authentication', 'Socket.io', 'WebRTC', 'Firebase Auth', 'Zod Validation', 'Bcrypt.js'],
+    },
+  },
+  {
+    type: 'skill',
+    title: 'AI Integration & Third-Party APIs',
+    order: 3,
+    data: {
+      level: '92',
+      skills: ['Google Gemini AI (2.5)', 'OpenAI API', 'Razorpay Payment Gateway', 'Resend Email API', 'Cloudinary Media CDN', 'Nodemailer SMTP'],
+    },
+  },
+  {
+    type: 'skill',
+    title: 'Databases, Cloud & DevOps',
+    order: 4,
+    data: {
+      level: '88',
+      skills: ['MongoDB', 'Mongoose ODM', 'MongoDB Atlas', 'SQL Server', 'Redis Caching', 'ASP.NET Core 8', 'Git & GitHub', 'Vercel', 'Render'],
     },
   },
 
