@@ -6,7 +6,6 @@ export const NAV = [
   { id: 'work', key: 'navWork', label: 'Work' },
   { id: 'skills', key: 'navSkills', label: 'Skills' },
   { id: 'experience', key: 'navExperience', label: 'Experience' },
-  { id: 'services', key: 'navServices', label: 'Services' },
   { id: 'about', key: 'navAbout', label: 'About' },
   { id: 'contact', key: 'navContact', label: 'Contact' },
 ]

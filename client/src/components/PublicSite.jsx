@@ -8,11 +8,8 @@ import Hero from './public/Hero'
 import Stats from './public/Stats'
 import Projects from './public/Projects'
 import Skills from './public/Skills'
-import Services from './public/Services'
 import Timeline from './public/Timeline'
 import About from './public/About'
-import Testimonials from './public/Testimonials'
-import Blog from './public/Blog'
 import Contact from './public/Contact'
 import Footer from './public/Footer'
 import Modal from './public/Modal'
@@ -67,7 +64,6 @@ export default function PublicSite({ site, loading, syncing, theme, toggleTheme 
       <Navbar site={site} settings={settings} theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Hero site={site} />
-        {techWords.length > 0 && <Marquee items={techWords} />}
         {/* `syncing` covers both "nothing yet" and "showing cached/snapshot content
             while the API wakes up" — `loading` is now false the moment the cache
             paints, so it would hide the hint exactly when it's most accurate. It
@@ -77,9 +73,7 @@ export default function PublicSite({ site, loading, syncing, theme, toggleTheme 
         <Projects site={site} onOpen={openProject} />
         <Skills site={site} />
         <Timeline site={site} />
-        <Services site={site} />
         <About site={site} />
-        <Testimonials site={site} />
         <Contact site={site} />
       </main>
       <Footer site={site} />

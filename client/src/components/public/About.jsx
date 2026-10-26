@@ -13,15 +13,15 @@ export default function About({ site }) {
     <section className="section" id="about">
       <div className="container">
         <Reveal className="section-head">
-          <span className="eyebrow">{text(site, 'aboutEyebrow', 'About')}</span>
-          <h2><Heading>{text(site, 'aboutTitle', 'Engineering *Mindset & Craft*')}</Heading></h2>
+          <span className="eyebrow">{text(site, 'aboutEyebrow', 'Background')}</span>
+          <h2><Heading>{text(site, 'aboutTitle', 'Engineer *Profile & Background*')}</Heading></h2>
         </Reveal>
 
         <div className="about-bento-grid">
           {/* Main Story & Narrative */}
           <Reveal className="about-narrative-card glass" delay={0.05}>
             <div className="narrative-badge">
-              <Sparkles size={16} /> Full Stack Developer
+              <GraduationCap size={16} /> Software Engineer
             </div>
             <p className="narrative-lead">
               {about.summary}

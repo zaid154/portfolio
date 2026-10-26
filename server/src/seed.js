@@ -40,14 +40,14 @@ const items = [
     order: 1,
     featured: true,
     data: {
-      badge: 'Available for Full-Time Roles · Open to Work',
-      eyebrow: 'Full Stack MERN Developer',
-      headline: 'Building modern MERN web applications.',
-      roles: ['Full Stack Developer', 'MERN Stack Developer', 'React Developer', 'Node.js Developer'],
+      badge: 'Open for Full-Time Software Engineering Roles',
+      eyebrow: 'Mohd Zaid — Full-Stack Engineer',
+      headline: 'Engineering High-Throughput & Scalable Web Applications.',
+      roles: ['Full-Stack Engineer', 'MERN Systems Developer', 'Backend & API Engineer'],
       description:
-        "Full Stack MERN Developer with completed internship experience at Humanoid Maker. I build high-performance web applications, secure REST APIs, and scalable architectures with React, Node.js, Express.js, and MongoDB.",
-      primaryCta: 'View Projects',
-      secondaryCta: 'Contact Me',
+        "Full-Stack Software Engineer with production experience at Humanoid Maker. Specialized in high-performance MERN architectures, Redis caching, real-time WebSockets, and clean system design.",
+      primaryCta: 'Explore Projects & Systems',
+      secondaryCta: 'Get In Touch',
       floatOne: 'MERN Stack',
       floatTwo: 'Clean Code',
       image: PROFILE_IMAGE,
@@ -55,10 +55,10 @@ const items = [
   },
 
   // ── Stats ────────────────────────────────────────────────────────────────────
-  { type: 'stat', title: '11+', order: 1, data: { value: '11+', label: 'Projects Completed' } },
-  { type: 'stat', title: '15+', order: 2, data: { value: '15+', label: 'Technologies' } },
-  { type: 'stat', title: '1', order: 3, data: { value: '1', label: 'Internship Completed' } },
-  { type: 'stat', title: '100%', order: 4, data: { value: '100%', label: 'Dedication' } },
+  { type: 'stat', title: '60%', order: 1, data: { value: '60%', label: 'DB Load Reduction (Redis)' } },
+  { type: 'stat', title: '45%', order: 2, data: { value: '45%', label: 'API Latency Drop' } },
+  { type: 'stat', title: '11+', order: 3, data: { value: '11+', label: 'Production Web Apps' } },
+  { type: 'stat', title: '4+', order: 4, data: { value: '4+', label: 'Real-Time / Streaming Systems' } },
 
   // ── About ────────────────────────────────────────────────────────────────────
   {
@@ -127,11 +127,11 @@ const items = [
     featured: true,
     data: {
       description:
-        'AI-Powered Study Material Marketplace — Created academic notes marketplace with Razorpay checkout and protected PDF preview capabilities. Leveraged Gemini AI to generate automated chapter summaries, key takeaways, and flashcards.',
+        'AI Study Notes Marketplace — Architected digital study resource marketplace with protected PDF reader and Razorpay checkout. Integrated Gemini 2.5 AI for automated chapter summaries, interactive flashcards, and conceptual takeaways.',
       image: 'https://res.cloudinary.com/uvxhwkuo/image/upload/v1783331196/portfolio-cms/notegenie.png',
       stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Razorpay', 'Gemini AI', 'Resend', 'Vercel', 'Render'],
       liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/NoteGenie',
     },
   },
   {
@@ -141,11 +141,11 @@ const items = [
     featured: true,
     data: {
       description:
-        'Multi-Vendor E-Commerce Platform — Built full-stack marketplace with JWT auth, indexed MongoDB schemas, multi-filter search, and cart. Integrated Razorpay payment gateway, automated GST invoicing, and a centralized vendor admin panel.',
+        'Multi-Vendor E-Commerce Platform — Engineered scalable marketplace architecture with indexed MongoDB schemas, multi-filter catalog search, cart workflows, Razorpay payment gateway integration, automated GST invoicing, and merchant control panel.',
       image: '/images/nexamart.png',
       stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Razorpay', 'Nodemailer', 'Vercel', 'Render'],
       liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/Nexa-Mart',
     },
   },
   {
@@ -155,11 +155,11 @@ const items = [
     featured: true,
     data: {
       description:
-        'AI Interview Preparation Platform — Parsed candidate resumes to dynamically generate personalized, role-specific technical questions. Integrated Gemini API with structured prompt evaluation, real-time candidate scoring, and feedback.',
+        'AI Technical Interview Platform — Built resume-parsing engine that dynamically structures role-tailored technical questions using Google Gemini API. Features multi-turn prompt evaluation, live candidate scoring, and structured feedback reports.',
       image: '',
       stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'Google Gemini AI', 'MongoDB', 'JWT', 'Vercel'],
       liveUrl: 'https://ai-mock-interview-three-pi.vercel.app/',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/Ai-Mock-Interview',
     },
   },
   {
@@ -169,11 +169,11 @@ const items = [
     featured: true,
     data: {
       description:
-        'ATS Resume Editor & Scoring Engine — Engineered interactive resume editor featuring real-time ATS scoring, custom themes, and live preview. Implemented client-side state management with vector PDF generation for lossless formatting exports.',
+        'ATS Resume Engine & Vector PDF Generator — Created real-time ATS resume editor with scoring engine, customizable typography, and client-side vector PDF generation ensuring 100% lossless layout formatting across parsers.',
       image: '',
       stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'MongoDB Atlas', 'Zod', 'Nodemailer', 'Tailwind CSS'],
       liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/ATS-Resume-Builder',
     },
   },
   {
@@ -183,11 +183,11 @@ const items = [
     featured: true,
     data: {
       description:
-        'Full-stack dating and professional networking platform tailored for software developers. Features Tinder-style swipe matchmaking, real-time Socket.io direct messaging, WebRTC 1-on-1 audio and video calling, photo verification badge system, tech-stack filters, and an analytics-rich admin control suite.',
+        'Developer Networking & Real-Time Matchmaking — Full-stack networking platform featuring swipe-based matching, real-time Socket.io direct messaging, WebRTC 1-on-1 audio/video peer calling, tech-stack search filters, and admin moderation.',
       image: '',
       stack: ['React 19', 'Vite', 'Node.js', 'Express.js', 'Socket.io', 'WebRTC', 'MongoDB', 'Tailwind CSS'],
       liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/developer-meetups',
     },
   },
   {
@@ -197,11 +197,11 @@ const items = [
     featured: false,
     data: {
       description:
-        'Private real-time communication platform offering instant messaging, group conversations, peer-to-peer WebRTC audio and video calling without intermediate server bottlenecks, inline voice notes, rich file sharing, message reactions, pinned chats, and presence status indicators.',
+        'Real-Time P2P Communication Suite — Engineered instant messaging system with peer-to-peer WebRTC voice/video calls, inline voice notes, rich file transfers, pinned chats, message reactions, and live user presence indicators.',
       image: '',
       stack: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'WebRTC', 'Vite'],
       liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/Share-System',
     },
   },
   {
@@ -211,11 +211,11 @@ const items = [
     featured: false,
     data: {
       description:
-        'Full-stack employee management and payroll platform. Offers dynamic HR metric dashboards, employee profiles with salary structures, one-click attendance check-in/out, multi-type leave approval workflows, automatic gross-to-net salary computation with deductions, and batch printable payslip generation.',
+        'Enterprise Payroll & HR System — Production workforce platform with real-time employee attendance tracking, multi-tier leave approval workflows, automated gross-to-net salary computation with deductions, and batch printable PDF payslips.',
       image: '',
       stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'REST API'],
       liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/Employee-Management-System',
     },
   },
   {
@@ -225,11 +225,11 @@ const items = [
     featured: true,
     data: {
       description:
-        'Modern Netflix clone featuring a Gemini-powered conversational AI movie assistant, real-time TMDB catalog search, categorized movie/TV carousels, detailed title pages with trailer video playback, Firebase authentication, and offline watchlist persistence via Redux Toolkit.',
+        'AI-Powered Streaming & Discovery — OTT platform with conversational Gemini AI movie assistant, real-time TMDB API catalog, categorized carousels, video trailer player, Firebase auth, and Redux Toolkit persistent watchlist state.',
       image: '/images/Natifix.png',
       stack: ['React 19', 'Redux Toolkit', 'Firebase Auth', 'Gemini AI', 'TMDB API', 'Tailwind CSS'],
       liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/Natifix',
     },
   },
   {
@@ -239,11 +239,11 @@ const items = [
     featured: false,
     data: {
       description:
-        'Full-stack food ordering and delivery web application featuring interactive restaurant menus, categorized dish filtering, cart state management, checkout with delivery tracking, and responsive mobile-first UI.',
+        'Food Ordering & Delivery Application — Full-stack food ordering app with interactive restaurant catalogs, categorized meal filtering, cart state management, checkout with order status tracking, and mobile-optimized UI.',
       image: '/images/yumrun.png',
       stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
       liveUrl: '',
-      githubUrl: 'https://github.com/zaid154',
+      githubUrl: 'https://github.com/zaid154/YumRun',
     },
   },
   {
@@ -624,20 +624,20 @@ const items = [
     title: 'Section Titles',
     order: 1,
     data: {
-      workEyebrow: 'Projects',
-      workTitle: 'Featured *Projects*',
+      workEyebrow: 'Engineering Work',
+      workTitle: 'Featured *Systems & Projects*',
       workSubtitle:
-        'A collection of full-stack applications, AI-powered solutions, and modern web experiences built using the MERN stack.',
-      skillsEyebrow: 'Skills',
-      skillsTitle: 'Technologies I *Work With*',
+        'Production-grade full-stack architectures, real-time communication systems, and high-performance web applications.',
+      skillsEyebrow: 'Technical Capabilities',
+      skillsTitle: 'Engineering *Stack & Architecture*',
       servicesEyebrow: 'Services',
       servicesTitle: 'What I *Build*',
-      experienceEyebrow: 'Career Path',
+      experienceEyebrow: 'Track Record',
       experienceTitle: 'Experience & *Education*',
       experienceColTitle: 'Work Experience',
       educationColTitle: 'Education & Certifications',
-      aboutEyebrow: 'About',
-      aboutTitle: 'Know More *About Me*',
+      aboutEyebrow: 'Background',
+      aboutTitle: 'Engineer *Profile & Story*',
       testimonialsEyebrow: 'Testimonials',
       testimonialsTitle: 'What People *Say*',
       blogEyebrow: 'Blog',
