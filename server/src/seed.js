@@ -24,8 +24,8 @@ import Message from './models/Message.js'
 
 const admin = {
   name: process.env.ADMIN_NAME || 'Mohd Zaid',
-  email: process.env.ADMIN_EMAIL || 'admin@example.com',
-  password: process.env.ADMIN_PASSWORD || 'ChangeMe123!',
+  email: process.env.ADMIN_EMAIL || 'zaidm1323@gmail.com',
+  password: process.env.ADMIN_PASSWORD || 'Zaid@9999201255',
 }
 
 // Cloudinary-hosted profile photo (folder: portfolio-cms).
@@ -158,7 +158,7 @@ const items = [
         'AI Technical Interview Platform — Built resume-parsing engine that dynamically structures role-tailored technical questions using Google Gemini API. Features multi-turn prompt evaluation, live candidate scoring, and structured feedback reports.',
       image: '',
       stack: ['React.js', 'Vite', 'Node.js', 'Express.js', 'Google Gemini AI', 'MongoDB', 'JWT', 'Vercel'],
-      liveUrl: 'https://ai-mock-interview-three-pi.vercel.app/',
+      liveUrl: 'https://mockmate-pro.vercel.app/',
       githubUrl: 'https://github.com/zaid154/Ai-Mock-Interview',
     },
   },
@@ -704,7 +704,9 @@ async function seed() {
     await User.create(admin)
     console.log(`Created admin: ${admin.email}`)
   } else {
-    console.log(`Admin already exists: ${admin.email}`)
+    existingAdmin.password = admin.password
+    await existingAdmin.save()
+    console.log(`Admin password updated: ${admin.email}`)
   }
 
   // Wipe every content type present in `items`, then reinsert fresh — so the DB
