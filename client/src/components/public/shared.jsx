@@ -16,15 +16,24 @@ export const SERVICE_ICONS = { Layers, MonitorSmartphone, Server, LayoutDashboar
 
 export const initials = (name = '') => name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase()
 
-// Render a heading, gradient-highlighting any *asterisk-wrapped* part (falls back to the last two words).
+// Render a heading, optionally styling asterisk-wrapped words if explicitly marked.
 export function Heading({ children }) {
   const str = String(children || '')
   const stars = (str.match(/\*/g) || []).length
-  // Only treat asterisks as markers when they're balanced (even count).
   if (stars >= 2 && stars % 2 === 0) {
-    return <>{str.split('*').map((p, i) => (i % 2 ? <span key={i} className="gradient-text">{p}</span> : <span key={i}>{p}</span>))}</>
+    return (
+      <>
+        {str.split('*').map((p, i) =>
+          i % 2 ? (
+            <span key={i} className="heading-highlight">
+              {p}
+            </span>
+          ) : (
+            <span key={i}>{p}</span>
+          )
+        )}
+      </>
+    )
   }
-  const words = str.replace(/\*/g, '').split(' ')
-  if (words.length < 3) return <span className="gradient-text">{words.join(' ')}</span>
-  return <>{words.slice(0, -2).join(' ')} <span className="gradient-text">{words.slice(-2).join(' ')}</span></>
+  return <>{str}</>
 }

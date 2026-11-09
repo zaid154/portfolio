@@ -5,7 +5,6 @@ import { Marquee, GithubIcon } from './ui'
 
 import Navbar from './public/Navbar'
 import Hero from './public/Hero'
-import Stats from './public/Stats'
 import Projects from './public/Projects'
 import Skills from './public/Skills'
 import Timeline from './public/Timeline'
@@ -69,7 +68,6 @@ export default function PublicSite({ site, loading, syncing, theme, toggleTheme 
             paints, so it would hide the hint exactly when it's most accurate. It
             clears when the request settles, so a dead API can't pin it on screen. */}
         {(syncing ?? loading) && <div className="notice">{text(site, 'syncingLabel')}</div>}
-        <Stats site={site} />
         <Projects site={site} onOpen={openProject} />
         <Skills site={site} />
         <Timeline site={site} />
