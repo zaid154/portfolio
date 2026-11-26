@@ -46,7 +46,7 @@ services:
       #                   Render would force every Atlas SRV lookup out to a public
       #                   resolver instead of Render's fast internal one, making
       #                   each cold start slower. Leave it unset in production.
-      #   PORT          — Render injects its own; server/src/index.js reads it.
+      #   PORT          — Render injects its own; server/src/server.js reads it.
       #
       # CORS allow-list — set to your Vercel URL(s), comma-separated. *.vercel.app
       # preview deployments are always allowed by the API, so this is your prod domain.
