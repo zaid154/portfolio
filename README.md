@@ -190,7 +190,7 @@ It does **not** eliminate the cold start:
 
 - **Writes still wait the full 30-60 s.** The contact form (`POST /api/public/contact`) has nothing to fall back on — a visitor who submits against a sleeping instance sits on a spinner until the container is up. Admin login at `/admin` is the same.
 - **The snapshot is only as fresh as the last Vercel deploy.** CMS edits made after it are invisible until the live fetch resolves (or you redeploy).
-- **The container still has to boot.** The API binds its socket *before* connecting to MongoDB (`server/src/index.js`), so the Atlas handshake is no longer part of the critical path — but Render still has to start the process, and the first DB-backed request waits on that handshake via Mongoose's command buffering.
+- **The container still has to boot.** The API binds its socket *before* connecting to MongoDB (`server/src/server.js`), so the Atlas handshake is no longer part of the critical path — but Render still has to start the process, and the first DB-backed request waits on that handshake via Mongoose's command buffering.
 
 Note what a `200` from `/api/health` does and doesn't prove: it means the process is up **and** has reached MongoDB at least once. It returns `503` until the first connect succeeds — that's what keeps Render from promoting a deploy whose database credentials are wrong. It does *not* track the live connection state afterwards, so a `200` is not proof the database is reachable right now.
 
